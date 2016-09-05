@@ -1,0 +1,30 @@
+{
+  "name": "prismic-utils",
+  "version": "0.1.0",
+  "description": "A collection of functions for parsing data from a Prismic CMS",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel source -d dist",
+    "lint": "standard -d source",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/everydayhero/prismic-utils.git"
+  },
+  "author": "Ellis Clayton <ellis@ellisclayton.info>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/everydayhero/prismic-utils/issues"
+  },
+  "homepage": "https://github.com/everydayhero/prismic-utils#readme",
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "standard": "^8.0.0"
+  },
+  "peerDependencies": {
+    "prismic.io": "^3.1.3"
+  }
+}
