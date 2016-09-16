@@ -25,7 +25,7 @@ exports.default = function (prismic) {
       return prismic.getGroup(group) ? prismic.getGroup(group).toArray() : [];
     },
     getLink: function getLink(link) {
-      return prismic.getLink(link).value.url || '';
+      return prismic.getLink(link) ? prismic.getLink(link).value.url : '';
     }
   };
 };

@@ -26,6 +26,6 @@ export default (prismic) => ({
   },
 
   getLink (link) {
-    return prismic.getLink(link).value.url || ''
+    return prismic.getLink(link) ? prismic.getLink(link).value.url : ''
   }
 })
