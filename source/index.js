@@ -1,3 +1,7 @@
+import striptags from 'striptags'
+
+const tagStripSerializer = (element, content) => striptags(content)
+
 export default (prismic) => ({
   getImage (image) {
     return prismic.getImage(image) && prismic.getImage(image).main
@@ -9,6 +13,10 @@ export default (prismic) => ({
 
   getStructuredText (text, htmlSerializer) {
     return prismic.getStructuredText(text) && prismic.getStructuredText(text).asHtml({}, htmlSerializer) || ''
+  },
+
+  getCleanStructuredText (text) {
+    return prismic.getStructuredText(text) && prismic.getStructuredText(text).asHtml({}, tagStripSerializer) || ''
   },
 
   getColor (color) {
