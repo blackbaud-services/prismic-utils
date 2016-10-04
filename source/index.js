@@ -35,5 +35,9 @@ export default (prismic) => ({
 
   getLink (link) {
     return prismic.getLink(link) ? prismic.getLink(link).value.url : ''
+  },
+
+  getSelect (select) {
+    return prismic.fragments[select] ? prismic.fragments[select].value : ''
   }
 })
