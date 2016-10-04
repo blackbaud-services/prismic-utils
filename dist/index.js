@@ -39,6 +39,9 @@ exports.default = function (prismic) {
     },
     getLink: function getLink(link) {
       return prismic.getLink(link) ? prismic.getLink(link).value.url : '';
+    },
+    getSelect: function getSelect(select) {
+      return prismic.fragments[select] ? prismic.fragments[select].value : '';
     }
   };
 };
