@@ -42,6 +42,10 @@ exports.default = function (prismic) {
     },
     getSelect: function getSelect(select) {
       return prismic.fragments[select] ? prismic.fragments[select].value : '';
+    },
+    getEmbed: function getEmbed(embed) {
+      var video = prismic.get(video);
+      return video ? video.asHtml() : '';
     }
   };
 };
