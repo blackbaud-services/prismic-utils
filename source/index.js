@@ -39,5 +39,10 @@ export default (prismic) => ({
 
   getSelect (select) {
     return prismic.fragments[select] ? prismic.fragments[select].value : ''
+  },
+
+  getEmbed (embed) {
+    const video = prismic.get(embed)
+    return video ? video.asHtml() : ''
   }
 })
