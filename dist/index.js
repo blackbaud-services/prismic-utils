@@ -44,7 +44,7 @@ exports.default = function (prismic) {
       return prismic.fragments[select] ? prismic.fragments[select].value : '';
     },
     getEmbed: function getEmbed(embed) {
-      var video = prismic.get(video);
+      var video = prismic.get(embed);
       return video ? video.asHtml() : '';
     }
   };
