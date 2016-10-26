@@ -1,6 +1,8 @@
 # Prismic Utils
 
-A collection of functions for parsing data from a Prismic CMS
+A collection of functions for parsing data from a Prismic CMS.
+
+This project is intended to simplify the development experience with Prismic.io. However, this is not an official Prismic.io project.
 
 ---
 
@@ -43,7 +45,7 @@ const htmlSerializer = (element, content) => {
       />
     )
   }
-  
+
   return null
 }
 ```
@@ -55,3 +57,8 @@ const body = getStructuredText('page.body', htmlSerializer)
 ```
 
 The result will be a String of HTML.
+
+## License
+
+MIT. See LICENSE file.
+
