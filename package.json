@@ -9,6 +9,9 @@
     "prepublish": "npm run build",
     "test": "npm run lint"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/everydayhero/prismic-utils.git"
