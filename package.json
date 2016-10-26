@@ -6,6 +6,7 @@
   "scripts": {
     "build": "babel source -d dist",
     "lint": "standard -d source",
+    "prepublish": "npm run build",
     "test": "npm run lint"
   },
   "repository": {
