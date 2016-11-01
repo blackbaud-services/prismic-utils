@@ -44,5 +44,10 @@ export default (prismic) => ({
   getEmbed (embed) {
     const video = prismic.get(embed)
     return video ? video.asHtml() : ''
+  },
+
+  getNumber (number) {
+    const value = prismic.getNumber(number)
+    return !isNaN(value) ? value : 0
   }
 })
