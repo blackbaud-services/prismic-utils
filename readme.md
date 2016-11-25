@@ -8,7 +8,7 @@ This project is intended to simplify the development experience with Prismic.io.
 
 ## Installation
 
-`npm install everydayhero/prismic-utils#0.1.0 --save-dev`
+`yarn add prismic-utils`
 
 ## Usage
 
@@ -17,14 +17,14 @@ Import the package, and initialise it with your Prismic document object.
 ```javascript
 import prismicUtils from 'prismic-utils'
 
-const prismic = prismicUtils(gub)
+const prismic = prismicUtils(doc, 'page')
 ```
 
 Start parsing data
 
 ```javascript
-const caption = prismic.getText('page.caption')
-const logo = prismic.getImage('page.logo')
+const caption = prismic.getText('caption')
+const logo    = prismic.getImage('logo')
 ```
 
 That's just a couple of parsing functions. There's a few more. Check out the source.
@@ -53,7 +53,7 @@ const htmlSerializer = (element, content) => {
 And then use it with the Structured Text helper:
 
 ```javascript
-const body = getStructuredText('page.body', htmlSerializer)
+const body = getStructuredText('body', htmlSerializer)
 ```
 
 The result will be a String of HTML.
