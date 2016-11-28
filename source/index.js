@@ -2,52 +2,54 @@ import striptags from 'striptags'
 
 const tagStripSerializer = (element, content) => striptags(content)
 
+const fieldString = (field, docType) => docType ? `${docType}.${field}` : field
+
 export default (prismic, docType) => ({
   getImage (image) {
-    return prismic.getImage(`${docType}.${image}`) && prismic.getImage(`${docType}.${image}`).main
+    return prismic.getImage(fieldString(image, docType)) && prismic.getImage(fieldString(image, docType)).main
   },
 
   getText (text) {
-    return prismic.getText(`${docType}.${text}`) || ''
+    return prismic.getText(fieldString(text, docType)) || ''
   },
 
   getStructuredText (text, htmlSerializer) {
-    return prismic.getStructuredText(`${docType}.${text}`) && prismic.getStructuredText(`${docType}.${text}`).asHtml({}, htmlSerializer) || ''
+    return prismic.getStructuredText(fieldString(text, docType)) && prismic.getStructuredText(fieldString(text, docType)).asHtml({}, htmlSerializer) || ''
   },
 
   getCleanStructuredText (text) {
-    return prismic.getStructuredText(`${docType}.${text}`) && prismic.getStructuredText(`${docType}.${text}`).asHtml({}, tagStripSerializer) || ''
+    return prismic.getStructuredText(fieldString(text, docType)) && prismic.getStructuredText(fieldString(text, docType)).asHtml({}, tagStripSerializer) || ''
   },
 
   getColor (color) {
-    return prismic.getColor(`${docType}.${color}`) || '#000'
+    return prismic.getColor(fieldString(color, docType)) || '#000'
   },
 
   getSlices (slices) {
-    return prismic.getSliceZone(`${docType}.${slices}`)
-    ? prismic.getSliceZone(`${docType}.${slices}`).slices
+    return prismic.getSliceZone(fieldString(slices, docType))
+    ? prismic.getSliceZone(fieldString(slices, docType)).slices
     : []
   },
 
   getGroup (group) {
-    return prismic.getGroup(`${docType}.${group}`) ? prismic.getGroup(`${docType}.${group}`).toArray() : []
+    return prismic.getGroup(fieldString(group, docType)) ? prismic.getGroup(fieldString(group, docType)).toArray() : []
   },
 
   getLink (link) {
-    return prismic.getLink(`${docType}.${link}`) ? prismic.getLink(`${docType}.${link}`).value.url : ''
+    return prismic.getLink(fieldString(link, docType)) ? prismic.getLink(fieldString(link, docType)).value.url : ''
   },
 
   getSelect (select) {
-    return prismic.fragments[`${docType}.${select}`] ? prismic.fragments[`${docType}.${select}`].value : ''
+    return prismic.fragments[fieldString(select, docType)] ? prismic.fragments[fieldString(select, docType)].value : ''
   },
 
   getEmbed (embed) {
-    const video = prismic.get(`${docType}.${embed}`)
+    const video = prismic.get(fieldString(embed, docType))
     return video ? video.asHtml() : ''
   },
 
   getNumber (number) {
-    const value = prismic.getNumber(`${docType}.${number}`)
+    const value = prismic.getNumber(fieldString(number, docType))
     return !isNaN(value) ? value : 0
   }
 })
