@@ -1,38 +1,114 @@
 # Prismic Utils
 
+<<<<<<< 0d686dc4afa9e3c4df195ff2c0f4b03543577626
 A collection of functions for parsing data from a Prismic CMS.
 
 This project is intended to simplify the development experience with Prismic.io. However, this is not an official Prismic.io project.
+=======
+A collection of functions for fetching and parsing data from a Prismic CMS
+>>>>>>> Auto deserialize
 
 ---
 
 ## Installation
 
+<<<<<<< 0d686dc4afa9e3c4df195ff2c0f4b03543577626
 `yarn add prismic-utils`
+=======
+###### Yarn
+>>>>>>> Auto deserialize
 
-## Usage
+`yarn install prismic-utils`
 
-Import the package, and initialise it with your Prismic document object.
+###### NPM
+`npm install prismic-utils --save`
 
-```javascript
-import prismicUtils from 'prismic-utils'
+## Fetching Data
 
-const prismic = prismicUtils(doc, 'page')
+### `fetchDocuments`
+
+This provides a simple document fetching alternative from Prismic.
+
+It takes a params object which accepts a few handy options you can configure.
+
+```
+import { fetchDocuments } from 'prismic-utils'
+
+fetchDocuments({
+  repository: YOUR_PRISMIC_REPO,
+  type: YOUR_DOCUMENT_TYPE
+})
+.then((documents) => {
+  // documents will be an array of your prismic documents
+})
 ```
 
-Start parsing data
+###### Options
 
+- `repository` is the slug of your repository, which will look something like `my-repository`
+- `type` is the type of document you are fetching e.g. `page`
+- `single` can be set to true if you only want a single doc returned, rather than an array of docs
+- `order` an array of objects that can specify the order you want the documents returned
+
+```
+fetchDocuments({
+  repository: YOUR_PRISMIC_REPO,
+  type: YOUR_DOCUMENT_TYPE,
+  order: [{
+    field: 'date',
+    asc: true
+  }]
+})
+```
+
+###### Example Action
+
+This will commonly be used in actions in our Redux setup, something like this.
+
+<<<<<<< 0d686dc4afa9e3c4df195ff2c0f4b03543577626
+const prismic = prismicUtils(doc, 'page')
+=======
+>>>>>>> Auto deserialize
+```
+export const fetchPages = () => (dispatch) => {
+  dispatch({
+    type: FETCH_PAGES
+  })
+
+  return fetchDocuments({
+    repository: PRISMIC_REPO,
+    type: 'page'
+  })
+  .then((pages) => dispatch(fetchPagesSuccess(pages)))
+  .catch((error) => dispatch(fetchPagesFailure(error)))
+}
+
+const fetchPagesSuccess = (pages) => ({
+  type: FETCH_PAGES_SUCCESS,
+  payload: { pages }
+})
+
+<<<<<<< 0d686dc4afa9e3c4df195ff2c0f4b03543577626
 ```javascript
 const caption = prismic.getText('caption')
 const logo    = prismic.getImage('logo')
+=======
+const fetchPagesFailure = (error) => ({
+  type: FETCH_PAGES_FAILURE,
+  payload: { error }
+})
+>>>>>>> Auto deserialize
 ```
 
-That's just a couple of parsing functions. There's a few more. Check out the source.
+## Deserializing Data
 
-### Working with Structured Text
+### `deserializeDocument`
 
-Structured text requires you to pass in your own html serializer function. Check out the Prismic Docs on how link resolvers are made, but here's a small example designed to work with React:
+This function takes a prismic document and automatically deserializes the data into a simple object key/value pairs we can easily use in our applications, rather than the complicated nested data that prismic.io returns.
 
+Deserializing a Prismic document becomes as simple as...
+
+<<<<<<< 0d686dc4afa9e3c4df195ff2c0f4b03543577626
 ```javascript
 const htmlSerializer = (element, content) => {
   if (element.type === 'hyperlink') {
@@ -47,18 +123,70 @@ const htmlSerializer = (element, content) => {
   }
 
   return null
+=======
+```
+const page = deserializeDocument(doc)
+
+/*
+page = {
+	id: '12345',
+	title: 'Document Title',
+	image: 'http://path.to.image',
+	content: '<h1>Heading</h1><p>Paragraph here...</p>',
+	cta: 'http://cta.path.here'
+>>>>>>> Auto deserialize
+}
+*/
+```
+
+#### Nesting Objects
+
+Sometimes, we may like to create nested objects to better group the document's data. We can do this using a simple naming convention of using hyphens in Prismic when creating our content types.
+
+###### Example
+
+`header-title`
+`header-image`
+`about-title`
+`about-cta1`
+`about-cta2`
+
+Will give us a final deserialized object, something like...
+
+<<<<<<< 0d686dc4afa9e3c4df195ff2c0f4b03543577626
+```javascript
+const body = getStructuredText('body', htmlSerializer)
+=======
+>>>>>>> Auto deserialize
+```
+{
+	header: {
+		title: '...',
+		image: '...'
+	},
+	about: {
+		title: '...',
+		cta1: '...',
+		cta2: '...'
+	}
 }
 ```
 
-And then use it with the Structured Text helper:
+#### HTML Serializing
 
-```javascript
-const body = getStructuredText('body', htmlSerializer)
-```
+Currently, it is just using the default `asHtml` to return a simple HTML string for our large text areas.
 
+
+## Todo
+
+<<<<<<< 0d686dc4afa9e3c4df195ff2c0f4b03543577626
 The result will be a String of HTML.
 
 ## License
 
 MIT. See LICENSE file.
 
+=======
+- Test nesting deserialized data
+- Custom HTML serializer
+>>>>>>> Auto deserialize
