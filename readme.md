@@ -1,57 +1,141 @@
 # Prismic Utils
 
-A collection of functions for parsing data from a Prismic CMS
+A collection of functions for fetching and parsing data from a Prismic CMS
 
 ---
 
 ## Installation
 
-`npm install everydayhero/prismic-utils#0.1.0 --save-dev`
+###### Yarn
 
-## Usage
+`yarn install prismic-utils`
 
-Import the package, and initialise it with your Prismic document object.
+###### NPM
+`npm install prismic-utils --save`
 
-```javascript
-import prismicUtils from 'prismic-utils'
+## Fetching Data
 
-const prismic = prismicUtils(gub)
+### `fetchDocuments`
+
+This provides a simple document fetching alternative from Prismic.
+
+It takes a params object which accepts a few handy options you can configure.
+
+```
+import { fetchDocuments } from 'prismic-utils'
+
+fetchDocuments({
+  repository: YOUR_PRISMIC_REPO,
+  type: YOUR_DOCUMENT_TYPE
+})
+.then((documents) => {
+  // documents will be an array of your prismic documents
+})
 ```
 
-Start parsing data
+###### Options
 
-```javascript
-const caption = prismic.getText('page.caption')
-const logo = prismic.getImage('page.logo')
+- `repository` is the slug of your repository, which will look something like `my-repository`
+- `type` is the type of document you are fetching e.g. `page`
+- `single` can be set to true if you only want a single doc returned, rather than an array of docs
+- `order` an array of objects that can specify the order you want the documents returned
+
+```
+fetchDocuments({
+  repository: YOUR_PRISMIC_REPO,
+  type: YOUR_DOCUMENT_TYPE,
+  order: [{
+    field: 'date',
+    asc: true
+  }]
+})
 ```
 
-That's just a couple of parsing functions. There's a few more. Check out the source.
+###### Example Action
 
-### Working with Structured Text
+This will commonly be used in actions in our Redux setup, something like this.
 
-Structured text requires you to pass in your own html serializer function. Check out the Prismic Docs on how link resolvers are made, but here's a small example designed to work with React:
+```
+export const fetchPages = () => (dispatch) => {
+  dispatch({
+    type: FETCH_PAGES
+  })
 
-```javascript
-const htmlSerializer = (element, content) => {
-  if (element.type === 'hyperlink') {
-    return renderToStaticMarkup(
-      <a
-        href={element.url}
-        dangerouslySetInnerHTML={{
-          __html: content
-        }}
-      />
-    )
-  }
-  
-  return null
+  return fetchDocuments({
+    repository: PRISMIC_REPO,
+    type: 'page'
+  })
+  .then((pages) => dispatch(fetchPagesSuccess(pages)))
+  .catch((error) => dispatch(fetchPagesFailure(error)))
+}
+
+const fetchPagesSuccess = (pages) => ({
+  type: FETCH_PAGES_SUCCESS,
+  payload: { pages }
+})
+
+const fetchPagesFailure = (error) => ({
+  type: FETCH_PAGES_FAILURE,
+  payload: { error }
+})
+```
+
+## Deserializing Data
+
+### `deserializeDocument`
+
+This function takes a prismic document and automatically deserializes the data into a simple object key/value pairs we can easily use in our applications, rather than the complicated nested data that prismic.io returns.
+
+Deserializing a Prismic document becomes as simple as...
+
+```
+const page = deserializeDocument(doc)
+
+/*
+page = {
+	id: '12345',
+	title: 'Document Title',
+	image: 'http://path.to.image',
+	content: '<h1>Heading</h1><p>Paragraph here...</p>',
+	cta: 'http://cta.path.here'
+}
+*/
+```
+
+#### Nesting Objects
+
+Sometimes, we may like to create nested objects to better group the document's data. We can do this using a simple naming convention of using hyphens in Prismic when creating our content types.
+
+###### Example
+
+`header-title`
+`header-image`
+`about-title`
+`about-cta1`
+`about-cta2`
+
+Will give us a final deserialized object, something like...
+
+```
+{
+	header: {
+		title: '...',
+		image: '...'
+	},
+	about: {
+		title: '...',
+		cta1: '...',
+		cta2: '...'
+	}
 }
 ```
 
-And then use it with the Structured Text helper:
+#### HTML Serializing
 
-```javascript
-const body = getStructuredText('page.body', htmlSerializer)
-```
+Currently, it is just using the default `asHtml` to return a simple HTML string for our large text areas.
 
-The result will be a String of HTML.
+
+## Todo
+
+- Test nesting deserialized data
+- Custom HTML serializer
