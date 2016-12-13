@@ -177,8 +177,9 @@ const body = getStructuredText('body', htmlSerializer)
 Currently, it is just using the default `asHtml` to return a simple HTML string for our large text areas.
 
 
-## Todo
+## Todo / Issues
 
+<<<<<<< 8f2c715b433df015bcfdc1e2ebd035ba840b2833
 <<<<<<< 0d686dc4afa9e3c4df195ff2c0f4b03543577626
 The result will be a String of HTML.
 
@@ -187,6 +188,9 @@ The result will be a String of HTML.
 MIT. See LICENSE file.
 
 =======
+=======
+- Doesn't like Slices that arent groups because Prismic doesn't give us types to work with
+>>>>>>> More options and ability to pass through html serializer
 - Test nesting deserialized data
 - Custom HTML serializer
 >>>>>>> Auto deserialize

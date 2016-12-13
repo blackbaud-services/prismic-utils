@@ -1,10 +1,12 @@
 import fetchDocuments from '../../fetch'
 import deserializeDocument from '../../deserialize'
 
-describe ('Tests', () => {
+describe ('Deserialize', () => {
   let testDocument
 
-  beforeEach ((done) => {
+  beforeEach (function (done) {
+    this.timeout(5000)
+
     if (testDocument) {
       done()
     } else {
