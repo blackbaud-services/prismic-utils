@@ -135,7 +135,8 @@ Will give us a final deserialized object, something like...
 Currently, it is just using the default `asHtml` to return a simple HTML string for our large text areas.
 
 
-## Todo
+## Todo / Issues
 
+- Doesn't like Slices that arent groups because Prismic doesn't give us types to work with
 - Test nesting deserialized data
 - Custom HTML serializer
