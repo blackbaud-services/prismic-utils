@@ -44,11 +44,4 @@ describe ('Deserialize', () => {
     expect(page.content).to.contain('<h1>Test Me</h1>')
     expect(page.content).to.not.contain('<h1>Heading 1</h1>')
   })
-
-  // it ('should use a basic default html serializer', () => {
-  //   const page = deserializeDocument(testDocument)
-  //
-  //   expect(page.content).to.contain('<h1>')
-  //   expect(page.content).to.contain('<p>')
-  // })
 })
