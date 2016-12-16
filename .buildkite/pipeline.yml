@@ -14,3 +14,11 @@ steps:
     branches: master
     agents:
       queue: elastic
+
+  - wait
+
+  - name: ":loudspeaker: Announce It"
+    command: "./bin/announce"
+    branches: master
+    agents:
+      queue: elastic
