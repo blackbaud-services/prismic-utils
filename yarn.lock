@@ -2442,11 +2442,18 @@ strip-json-comments@~1.0.1, strip-json-comments@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-1.0.4.tgz#1e15fbcac97d3ee99bf2d73b4c656b082bbafb91"
 
+<<<<<<< cd37d706d4af16cccabab02021c97312116d44a1
 <<<<<<< 0d686dc4afa9e3c4df195ff2c0f4b03543577626
 striptags@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/striptags/-/striptags-2.1.1.tgz#e771b8b3193b97bbed392dca59a78279d3c8a6a6"
 =======
+=======
+striptags@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/striptags/-/striptags-2.1.1.tgz#e771b8b3193b97bbed392dca59a78279d3c8a6a6"
+
+>>>>>>> Added back in old utils (now non breaking)
 supports-color@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-1.2.0.tgz#ff1ed1e61169d06b3cf2d588e188b18d8847e17e"

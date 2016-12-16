@@ -8,7 +8,8 @@
     "prepublish": "npm run build",
     "test:lint": "standard -d source",
     "test:unit": "mocha source/**/**/__tests__/*.js --compilers js:babel-register",
-    "test": "npm run test:lint && npm run test:unit"
+    "test": "npm run test:lint && npm run test:unit",
+    "prepublish": "npm test && npm run build"
   },
   "files": [
     "dist"
