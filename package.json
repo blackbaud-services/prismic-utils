@@ -5,9 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "babel source -d dist",
-    "lint": "standard -d source",
-    "prepublish": "npm run build",
-    "test": "npm run lint"
+    "test:lint": "standard -d source",
+    "test:unit": "mocha source/**/**/__tests__/*.js --compilers js:babel-register",
+    "test": "npm run test:lint && npm run test:unit",
+    "prepublish": "npm test && npm run build"
   },
   "files": [
     "dist"
@@ -26,10 +27,20 @@
     "babel-cli": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3",
     "standard": "^8.0.0"
   },
   "dependencies": {
     "prismic.io": "^3.3.0",
     "striptags": "^2.1.1"
+  },
+  "standard": {
+    "ignore": [
+      "**/__tests__/",
+      "/test/",
+      "/dist/"
+    ]
   }
 }
