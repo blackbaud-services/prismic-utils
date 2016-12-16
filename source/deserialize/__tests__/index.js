@@ -1,40 +1,54 @@
-import fetchDocuments from '../../fetch'
-import deserializeDocument from '../../deserialize'
+import {
+  deserializeDocument
+} from '../../index'
 
 describe ('Deserialize', () => {
-  let testDocument
-
-  beforeEach (function (done) {
-    this.timeout(5000)
-
-    if (testDocument) {
-      done()
-    } else {
-      fetchDocuments({
-        repository: PRISMIC_REPO,
-        type: 'page',
-        single: true
-      })
-      .then((page) => {
-        testDocument = page
-        done()
-      })
-    }
-  })
+  const doc = createPrismicDocument()
 
   it ('should deserialize a document', () => {
-    const page = deserializeDocument(testDocument)
+    const page = deserializeDocument(doc)
+    expect(page.id).to.eql('document-id')
+    expect(page.uid).to.eql('document-uid')
+  })
 
-    expect(typeof page.id).to.eql('string')
-    expect(typeof page.uid).to.eql('string')
-    expect(typeof page.title).to.eql('string')
-    expect(typeof page.content).to.eql('string')
+  it ('should deserialize a text field', () => {
+    const page = deserializeDocument(doc)
+    expect(page.title).to.eql('Page Title')
+  })
+
+  it ('should deserialize a number field', () => {
+    const page = deserializeDocument(doc)
+    expect(page.count).to.eql(50)
   })
 
   it ('should use a basic default html serializer', () => {
-    const page = deserializeDocument(testDocument)
-
-    expect(page.content).to.contain('<h1>')
-    expect(page.content).to.contain('<p>')
+    const page = deserializeDocument(doc)
+    expect(page.content).to.contain('<h1>Heading 1</h1>')
+    expect(page.content).to.contain('<p>Paragraph content</p>')
   })
+
+  it ('should use a supplied html serializer', () => {
+    const deserializer = ({ type, text }) => {
+      if (type = 'heading1') {
+        return '<h1>Test Me</h1>'
+      }
+      return null
+    }
+
+    const page = deserializeDocument(doc, {
+      htmlSerializers: {
+        'page.content': deserializer
+      }
+    })
+
+    expect(page.content).to.contain('<h1>Test Me</h1>')
+    expect(page.content).to.not.contain('<h1>Heading 1</h1>')
+  })
+
+  // it ('should use a basic default html serializer', () => {
+  //   const page = deserializeDocument(testDocument)
+  //
+  //   expect(page.content).to.contain('<h1>')
+  //   expect(page.content).to.contain('<p>')
+  // })
 })

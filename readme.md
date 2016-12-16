@@ -11,7 +11,74 @@ A collection of functions for fetching and parsing data from a Prismic CMS
 `yarn install prismic-utils`
 
 ###### NPM
+
 `npm install prismic-utils --save`
+
+## Deserializing Data
+
+### `deserializeDocument`
+
+This function takes a prismic document and automatically deserializes the data into a simple object key/value pairs we can easily use in our applications, rather than the complicated nested data that prismic.io returns.
+
+Deserializing a Prismic document becomes as simple as...
+
+```
+const page = deserializeDocument(doc)
+
+/*
+page = {
+	id: '12345',
+	title: 'Document Title',
+	image: 'http://path.to.image',
+	content: '<h1>Heading</h1><p>Paragraph here...</p>',
+	cta: 'http://cta.path.here'
+}
+*/
+```
+
+#### Nesting Objects
+
+Sometimes, we may like to create nested objects to better group the document's data. We can do this using a simple naming convention of using hyphens in Prismic when creating our content types.
+
+###### Example
+
+`header-title`
+`header-image`
+`about-title`
+`about-cta1`
+`about-cta2`
+
+Will give us a final deserialized object, something like...
+
+```
+{
+	header: {
+		title: '...',
+		image: '...'
+	},
+	about: {
+		title: '...',
+		cta1: '...',
+		cta2: '...'
+	}
+}
+```
+
+#### HTML Serializing
+
+Structured text areas will use a default deserializer which just returns vanilla HTML.
+
+You can also pass in your own HTML serializer for specific fields using the options parameter.
+
+```
+const options = {
+  htmlSerializers: {
+    'page.content': myCustomSerializer
+  }
+}
+
+const page = deserializeDocument(doc, options)
+```
 
 ## Fetching Data
 
@@ -80,63 +147,8 @@ const fetchPagesFailure = (error) => ({
 })
 ```
 
-## Deserializing Data
 
-### `deserializeDocument`
+## Todo
 
-This function takes a prismic document and automatically deserializes the data into a simple object key/value pairs we can easily use in our applications, rather than the complicated nested data that prismic.io returns.
-
-Deserializing a Prismic document becomes as simple as...
-
-```
-const page = deserializeDocument(doc)
-
-/*
-page = {
-	id: '12345',
-	title: 'Document Title',
-	image: 'http://path.to.image',
-	content: '<h1>Heading</h1><p>Paragraph here...</p>',
-	cta: 'http://cta.path.here'
-}
-*/
-```
-
-#### Nesting Objects
-
-Sometimes, we may like to create nested objects to better group the document's data. We can do this using a simple naming convention of using hyphens in Prismic when creating our content types.
-
-###### Example
-
-`header-title`
-`header-image`
-`about-title`
-`about-cta1`
-`about-cta2`
-
-Will give us a final deserialized object, something like...
-
-```
-{
-	header: {
-		title: '...',
-		image: '...'
-	},
-	about: {
-		title: '...',
-		cta1: '...',
-		cta2: '...'
-	}
-}
-```
-
-#### HTML Serializing
-
-Currently, it is just using the default `asHtml` to return a simple HTML string for our large text areas.
-
-
-## Todo / Issues
-
-- Doesn't like Slices that arent groups because Prismic doesn't give us types to work with
-- Test nesting deserialized data
-- Custom HTML serializer
+- Doesn't like slices that aren't groups
+- Support for tags and slugs
