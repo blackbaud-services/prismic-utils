@@ -8,7 +8,7 @@ A collection of functions for fetching and parsing data from a Prismic CMS
 
 ###### Yarn
 
-`yarn install prismic-utils`
+`yarn add prismic-utils`
 
 ###### NPM
 
