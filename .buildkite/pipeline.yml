@@ -1,0 +1,16 @@
+---
+steps:
+  - type: "waiter"
+
+  - name: ":nodejs: Test It"
+    command: "docker-compose run -rm build bin/test"
+    agents:
+      queue: elastic
+
+  - wait
+
+  - name: ":shipit: Deploy It"
+    command: "docker-compose run -rm build bin/deploy"
+    branches: master
+    agents:
+      queue: elastic
