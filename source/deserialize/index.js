@@ -91,7 +91,7 @@ const mapFieldTypesToArray = ({
   ...props
 }) => {
   // add document level fields
-  const documentFields = reduce(['id', 'uid'], (fields, field) => (
+  const documentFields = reduce(['id', 'uid', 'tags'], (fields, field) => (
     props[field] ? (
       fields.concat({
         key: field,
