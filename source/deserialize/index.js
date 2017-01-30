@@ -55,7 +55,11 @@ const deserializeField = (prismicDoc, { key, type }, options = {}) => {
     case 'SliceZone':
       const { slices = [] } = prismicDoc.getSliceZone(key) || {}
       return slices.map((slice) => {
-        const { value } = slice.value
+        // get the nested group values, or just set the slice.value if not a group
+        const {
+          value = slice.value
+        } = slice.value
+
         const deserializedValue = Array.isArray(value) ? (
           value.map((doc) => deserializeDocument(doc))
         ) : value
