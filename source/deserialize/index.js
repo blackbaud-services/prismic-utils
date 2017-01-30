@@ -20,6 +20,9 @@ const deserializeField = (prismicDoc, { key, type }, options = {}) => {
     case 'uid':
       return prismicDoc.uid
 
+    case 'tags':
+      return prismicDoc.tags
+
     case 'Text':
     case 'Select':
       return prismicDoc.getText(key)
