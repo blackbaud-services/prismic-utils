@@ -1,22 +1,25 @@
 import Prismic from 'prismic.io'
 
-export default ({
+export const fetchDocuments = ({
   repository,
   type,
-  single,
-  order = [],
+  fields = [],
+  orderings = [],
   token
-}) => {
-  const orderings = order.map(({ field, asc }) => `my.${type}.${field}${asc ? ' desc' : ''}`)
-
-  return Prismic.api(`https://${repository}.cdn.prismic.io/api`).then((Api) => (
+}) => (
+  Prismic.api(`https://${repository}.cdn.prismic.io/api`).then((Api) => (
     Api.form('everything')
       .ref(token || Api.master())
       .query([
-        Prismic.Predicates.at('document.type', type)
+        Prismic.Predicates.at('document.type', type),
+        ...fields.map(({ field, value }) => Prismic.Predicates.at(`my.${type}.${field}`, value))
       ])
       .orderings(orderings)
       .submit()
   ))
-  .then(({ results }) => single ? results[0] : results)
+  .then((response) => response.results)
+)
+
+export const fetchDocument = (params) => {
+  return fetchDocuments(params).then((results) => results[0])
 }

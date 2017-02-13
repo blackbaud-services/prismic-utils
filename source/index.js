@@ -1,3 +1,5 @@
 export { default } from './utils'
 export { default as deserializeDocument } from './deserialize'
-export { default as fetchDocuments } from './fetch'
+// export { default as fetchDocuments } from './fetch'
+export * from './fetch'
+export * from './reducer'
