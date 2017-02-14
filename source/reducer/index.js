@@ -22,7 +22,7 @@ const defaultHandleMultipleSuccess = (state, { data = [] }) => ({
   data: data.map((doc) => deserializeDocument(doc))
 })
 
-export const createDocumentReducer = (type, options = {}) => {
+export const createDocumentReducer = (namespace, options = {}) => {
   const {
     fetch = defaultHandleFetch,
     fetchFailure = defaultHandleFailure,
@@ -31,9 +31,9 @@ export const createDocumentReducer = (type, options = {}) => {
   } = options
 
   const c = {
-    FETCH: `${type}/FETCH`,
-    FETCH_SUCCESS: `${type}/FETCH_SUCCESS`,
-    FETCH_FAILURE: `${type}/FETCH_FAILURE`
+    FETCH: `${namespace}/FETCH`,
+    FETCH_SUCCESS: `${namespace}/FETCH_SUCCESS`,
+    FETCH_FAILURE: `${namespace}/FETCH_FAILURE`
   }
 
   const handlers = {
@@ -48,8 +48,8 @@ export const createDocumentReducer = (type, options = {}) => {
   }
 }
 
-export const createDocumentsReducer = (type, options = {}) => (
-  createDocumentReducer(type, {
+export const createDocumentsReducer = (namespace, options = {}) => (
+  createDocumentReducer(namespace, {
     fetchSuccess: defaultHandleMultipleSuccess,
     ...options
   })

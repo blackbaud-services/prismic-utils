@@ -17,11 +17,11 @@ const defaultHandleFailure = (c, error) => ({
   payload: { error }
 })
 
-export const createDocumentsAction = (type, options = {}) => (dispatch) => {
+export const createDocumentsAction = (namespace, options = {}) => (dispatch) => {
   const c = {
-    FETCH: `${type}/FETCH`,
-    FETCH_SUCCESS: `${type}/FETCH_SUCCESS`,
-    FETCH_FAILURE: `${type}/FETCH_FAILURE`
+    FETCH: `${namespace}/FETCH`,
+    FETCH_SUCCESS: `${namespace}/FETCH_SUCCESS`,
+    FETCH_FAILURE: `${namespace}/FETCH_FAILURE`
   }
 
   const {
@@ -45,8 +45,8 @@ export const createDocumentsAction = (type, options = {}) => (dispatch) => {
     })
 }
 
-export const createDocumentAction = (type, options) => {
-  return createDocumentsAction(type, {
+export const createDocumentAction = (namespace, options) => {
+  return createDocumentsAction(namespace, {
     ...options,
     fetch: fetchDocument
   })
