@@ -2,6 +2,8 @@
 
 A collection of functions for fetching and parsing data from a Prismic CMS
 
+[![Build status](https://badge.buildkite.com/2ba54e4ba3c3a0855de4c165b15f684841fbab4f616a9bba7d.svg)](https://buildkite.com/everyday-hero/prismic-utils)
+
 ---
 
 ## Installation
@@ -16,68 +18,30 @@ A collection of functions for fetching and parsing data from a Prismic CMS
 
 ## Deserializing Data
 
-### `deserializeDocument`
-
-This function takes a prismic document and automatically deserializes the data into a simple object key/value pairs we can easily use in our applications, rather than the complicated nested data that prismic.io returns.
-
-Deserializing a Prismic document becomes as simple as...
+**Deserialize a Prismic document into a simple object.**
 
 ```
+import { deserializeDocument } from 'prismic-utils'
+
 const page = deserializeDocument(doc)
-
-/*
-page = {
-	id: '12345',
-	title: 'Document Title',
-	image: 'http://path.to.image',
-	content: '<h1>Heading</h1><p>Paragraph here...</p>',
-	cta: 'http://cta.path.here'
-}
-*/
 ```
 
-#### Nesting Objects
+**Nest your deserialized data**
 
-Sometimes, we may like to create nested objects to better group the document's data. We can do this using a simple naming convention of using hyphens in Prismic when creating our content types.
+Use kebab case when naming your Prismic fields nest your deserialized data.
 
-###### Example
+E.g. `header-title` will deserialize to `{ header: { title: '' } }`
 
-`header-title`
-`header-image`
-`about-title`
-`about-cta1`
-`about-cta2`
+**Serialize HTML**
 
-Will give us a final deserialized object, something like...
+Provide a custom HTML serializer for specific fields.
 
 ```
-{
-	header: {
-		title: '...',
-		image: '...'
-	},
-	about: {
-		title: '...',
-		cta1: '...',
-		cta2: '...'
-	}
-}
-```
-
-#### HTML Serializing
-
-Structured text areas will use a default deserializer which just returns vanilla HTML.
-
-You can also pass in your own HTML serializer for specific fields using the options parameter.
-
-```
-const options = {
-  htmlSerializers: {
-    'page.content': myCustomSerializer
-  }
-}
-
-const page = deserializeDocument(doc, options)
+const page = deserializeDocument(doc, {
+	html: {
+		'page.content': myCustomSerializer
+	}	
+})
 ```
 
 ## Fetching Data

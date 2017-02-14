@@ -45,7 +45,10 @@ const deserializeField = (prismicDoc, { key, type }, options = {}) => {
 
     case 'Link.image':
       const imageLink = prismicDoc.getLink(key)
-      return imageLink && imageLink.value.image.url
+      return imageLink && {
+        url: imageLink.value.image.url,
+        alt: imageLink.value.image.alt
+      }
 
     case 'Link.file':
       const fileLink = prismicDoc.getLink(key)
