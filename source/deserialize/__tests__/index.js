@@ -13,7 +13,7 @@ describe ('Deserialize', () => {
 
   it ('should deserialize a text field', () => {
     const page = deserializeDocument(doc)
-    expect(page.title).to.eql('Page Title')
+    expect(page.name).to.eql('Barry')
   })
 
   it ('should deserialize a number field', () => {
@@ -43,5 +43,10 @@ describe ('Deserialize', () => {
 
     expect(page.content).to.contain('<h1>Test Me</h1>')
     expect(page.content).to.not.contain('<h1>Heading 1</h1>')
+  })
+
+  it ('should do get the clean text from the a StructuredText title field', () => {
+    const page = deserializeDocument(doc)
+    expect(page.title).to.contain('Page Title')
   })
 })

@@ -2,6 +2,18 @@
 
 A collection of functions for fetching and parsing data from a Prismic CMS
 
+[![Build status](https://badge.buildkite.com/2ba54e4ba3c3a0855de4c165b15f684841fbab4f616a9bba7d.svg?branch=master&style=flat-square)](https://buildkite.com/everyday-hero/prismic-utils)
+
+---
+
+## Table of Contents
+
+1. [Installation](#installation)
+2. [Deserializing Documents](#deserializing-data)
+3. [Reducers](#reducers)
+4. [Action Creators](#action-reducers)
+5. [Fetching Data](#fetching-data)
+
 ---
 
 ## Installation
@@ -14,141 +26,138 @@ A collection of functions for fetching and parsing data from a Prismic CMS
 
 `npm install prismic-utils --save`
 
+---
+
 ## Deserializing Data
 
-### `deserializeDocument`
-
-This function takes a prismic document and automatically deserializes the data into a simple object key/value pairs we can easily use in our applications, rather than the complicated nested data that prismic.io returns.
-
-Deserializing a Prismic document becomes as simple as...
+**Deserialize a Prismic document into a simple object**
 
 ```
-const page = deserializeDocument(doc)
-
-/*
-page = {
-	id: '12345',
-	title: 'Document Title',
-	image: 'http://path.to.image',
-	content: '<h1>Heading</h1><p>Paragraph here...</p>',
-	cta: 'http://cta.path.here'
-}
-*/
-```
-
-#### Nesting Objects
-
-Sometimes, we may like to create nested objects to better group the document's data. We can do this using a simple naming convention of using hyphens in Prismic when creating our content types.
-
-###### Example
-
-`header-title`
-`header-image`
-`about-title`
-`about-cta1`
-`about-cta2`
-
-Will give us a final deserialized object, something like...
-
-```
-{
-	header: {
-		title: '...',
-		image: '...'
-	},
-	about: {
-		title: '...',
-		cta1: '...',
-		cta2: '...'
-	}
-}
-```
-
-#### HTML Serializing
-
-Structured text areas will use a default deserializer which just returns vanilla HTML.
-
-You can also pass in your own HTML serializer for specific fields using the options parameter.
-
-```
-const options = {
-  htmlSerializers: {
-    'page.content': myCustomSerializer
-  }
-}
+import { deserializeDocument } from 'prismic-utils'
 
 const page = deserializeDocument(doc, options)
 ```
+
+**Params**
+
+`doc`: the Prismic document that has been fetched from the Prismic API
+
+`options`: additional options
+
+- `htmlSerializers`: custom html serializers for specific fields
+
+```
+htmlSerializers: { 'page.content': myCustomSerializer }
+```
+
+**Nest deserialized data**
+
+Use kebab case when naming your Prismic fields to nest your deserialized data.
+
+E.g. `header-title` will deserialize to `{ header: { title: '' } }`
+
+---
+
+## Reducers
+
+**Create a Redux reducer to manage Prismic doc(s)**
+
+Eliminate the need to write repetitive reducers to manage data from Prismic docs.
+
+```
+import { createDocumentsReducer } from 'prismic-utils'
+
+combineReducers({
+	pages: createDocumentsReducer('pages')
+})
+```
+
+**Params**
+
+`namespace`: this will be used to decide which actions to act upon
+
+- `createDocumentsReducer('pages')` will listen for `pages/FETCH`, `pages/FETCH_SUCCESS` and `pages/FETCH_FAILURE`
+
+`options`: additional options
+
+- `fetch`: override the default handler used for `FETCH` action
+- `fetchSuccess`: override the default handler used for `FETCH_SUCCESS` action
+- `fetchFailure`: override the default handler used for `FETCH_FAILURE` action
+- `initialState`: override the default initial state i.e. {}
+
+
+---
+
+## Action Creators
+
+**Create a Redux action creator**
+
+Eliminate the need to write repetitive files to fetch Prismic docs and dispatch the relevant actions.
+
+```
+import { createDocumentsAction } from 'prismic-utils'
+
+dispatch(createDocumentsAction('page', options))
+```
+
+`createDocumentsAction` returns a function to be used by Redux Thunk to fetch your documents and dispatch the relevant actions.
+
+**Params**
+
+`namespace`: this will be used to namespace the actions
+
+- `dispatch(createDocumentsAction('pages', options))` will dispatch the following actions
+- `pages/FETCH` when the request is being fired off
+- `pages/FETCH_SUCCESS` when the request is fulfilled, with the data key of the payload containing the found documents
+- `pages/FETCH_FAILURE` if there was an error during the request
+
+`options`: additional options that will be used by fetchDocuments
+
+- `type`: the type of document to fetch e.g. page
+- `fields`: an array of objects containing predicates e.g. [{ field: 'uid', value: 'my-uid' }]
+- `orderings`: an array of order string e.g. ['my.page.title desc']  
+- `token`: the document ref to fetch (defaults to Api.master())
+
+`createDocumentAction` is the same as `createDocumentsAction`, except it will only retrieve and return a single document.
+
+---
 
 ## Fetching Data
 
 ### `fetchDocuments`
 
-This provides a simple document fetching alternative from Prismic.
-
-It takes a params object which accepts a few handy options you can configure.
+**Fetch documents from the Prismic API**
 
 ```
 import { fetchDocuments } from 'prismic-utils'
 
-fetchDocuments({
-  repository: YOUR_PRISMIC_REPO,
-  type: YOUR_DOCUMENT_TYPE
-})
-.then((documents) => {
-  // documents will be an array of your prismic documents
-})
+fetchDocuments(options)
+	.then((docs) => docs) // docs will be an array of documents
 ```
 
-###### Options
+**Params**
 
-- `repository` is the slug of your repository, which will look something like `my-repository`
-- `type` is the type of document you are fetching e.g. `page`
-- `single` can be set to true if you only want a single doc returned, rather than an array of docs
-- `order` an array of objects that can specify the order you want the documents returned
+`options`: various options to use when fetching
 
-```
-fetchDocuments({
-  repository: YOUR_PRISMIC_REPO,
-  type: YOUR_DOCUMENT_TYPE,
-  order: [{
-    field: 'date',
-    asc: true
-  }]
-})
-```
+- `repository`: the name of the Prismic repository e.g. my-repository
+- `type`: the type of document to fetch e.g. page
+- `fields`: an array of objects containing predicates e.g. [{ field: 'uid', value: 'my-uid' }]
+- `orderings`: an array of order string e.g. ['my.page.title desc']  
+- `token`: the document ref to fetch (defaults to Api.master())
 
-###### Example Action
+### `fetchDocument`
 
-This will commonly be used in actions in our Redux setup, something like this.
+**Fetch a single document**
 
 ```
-export const fetchPages = () => (dispatch) => {
-  dispatch({
-    type: FETCH_PAGES
-  })
+import { fetchDocument } from 'prismic-utils'
 
-  return fetchDocuments({
-    repository: PRISMIC_REPO,
-    type: 'page'
-  })
-  .then((pages) => dispatch(fetchPagesSuccess(pages)))
-  .catch((error) => dispatch(fetchPagesFailure(error)))
-}
-
-const fetchPagesSuccess = (pages) => ({
-  type: FETCH_PAGES_SUCCESS,
-  payload: { pages }
-})
-
-const fetchPagesFailure = (error) => ({
-  type: FETCH_PAGES_FAILURE,
-  payload: { error }
-})
+fetchDocument(options)
+	.then((doc) => doc)
 ```
 
+---
 
 ## Todo
 
 - Doesn't like slices that aren't groups
-- Support for tags and slugs
