@@ -12,8 +12,17 @@ module.exports = function () {
     null,
     {
       'page.title': {
+        type: 'StructuredText',
+        value: [
+          {
+            text: 'Page Title',
+            type: 'heading1'
+          }
+        ]
+      },
+      'page.name': {
         type: 'Text',
-        value: 'Page Title'
+        value: 'Barry'
       },
       'page.count': {
         type: 'Number',

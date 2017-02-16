@@ -2,7 +2,17 @@
 
 A collection of functions for fetching and parsing data from a Prismic CMS
 
-[![Build status](https://badge.buildkite.com/2ba54e4ba3c3a0855de4c165b15f684841fbab4f616a9bba7d.svg)](https://buildkite.com/everyday-hero/prismic-utils)
+[![Build status](https://badge.buildkite.com/2ba54e4ba3c3a0855de4c165b15f684841fbab4f616a9bba7d.svg?branch=master&style=flat-square)](https://buildkite.com/everyday-hero/prismic-utils)
+
+---
+
+## Table of Contents
+
+1. [Installation](#installation)
+2. [Deserializing Documents](#deserializing-data)
+3. [Reducers](#reducers)
+4. [Action Creators](#action-reducers)
+5. [Fetching Data](#fetching-data)
 
 ---
 
@@ -42,7 +52,7 @@ htmlSerializers: { 'page.content': myCustomSerializer }
 
 **Nest deserialized data**
 
-Use kebab case when naming your Prismic fields nest your deserialized data.
+Use kebab case when naming your Prismic fields to nest your deserialized data.
 
 E.g. `header-title` will deserialize to `{ header: { title: '' } }`
 
@@ -103,7 +113,10 @@ dispatch(createDocumentsAction('page', options))
 
 `options`: additional options that will be used by fetchDocuments
 
-- `type`: the Prismic document type to fetch e.g. page
+- `type`: the type of document to fetch e.g. page
+- `fields`: an array of objects containing predicates e.g. [{ field: 'uid', value: 'my-uid' }]
+- `orderings`: an array of order string e.g. ['my.page.title desc']  
+- `token`: the document ref to fetch (defaults to Api.master())
 
 `createDocumentAction` is the same as `createDocumentsAction`, except it will only retrieve and return a single document.
 
@@ -127,9 +140,10 @@ fetchDocuments(options)
 `options`: various options to use when fetching
 
 - `repository`: the name of the Prismic repository e.g. my-repository
-- `type`: the type of document to fetch e.g. page 
-- `fields`: an array of objects containing predicates e.g. [{ field: 'uid', value: 'my-uid' }] 
+- `type`: the type of document to fetch e.g. page
+- `fields`: an array of objects containing predicates e.g. [{ field: 'uid', value: 'my-uid' }]
 - `orderings`: an array of order string e.g. ['my.page.title desc']  
+- `token`: the document ref to fetch (defaults to Api.master())
 
 ### `fetchDocument`
 

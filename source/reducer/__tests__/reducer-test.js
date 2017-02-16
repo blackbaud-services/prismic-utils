@@ -19,7 +19,7 @@ describe('Create Document Reducer', () => {
     const reducer = createDocumentReducer('page')
     const state = reducer({}, { type: 'page/FETCH_SUCCESS', payload: { data: createPrismicDocument() }})
     expect(state.status).to.eql('fetched')
-    expect(state.data.title).to.eql('Page Title')
+    expect(state.data.name).to.eql('Barry')
   })
 
   it('should handle FETCH_FAILURE', () => {
@@ -67,6 +67,6 @@ describe('Create Document Reducer', () => {
     ]}})
     expect(state.status).to.eql('fetched')
     expect(state.data.length).to.eql(3)
-    expect(state.data[0].title).to.eql('Page Title')
+    expect(state.data[0].name).to.eql('Barry')
   })
 })

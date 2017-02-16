@@ -1,0 +1,35 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/dan.henderson/.nvm/versions/node/v6.9.4/bin/node',
+1 verbose cli   '/Users/dan.henderson/.nvm/versions/node/v6.9.4/bin/npm',
+1 verbose cli   'version',
+1 verbose cli   'major' ]
+2 info using npm@3.10.10
+3 info using node@v6.9.4
+4 info git [ 'status', '--porcelain' ]
+5 verbose stack Error: Git working directory not clean.
+5 verbose stack M  readme.md
+5 verbose stack M  source/deserialize/__tests__/index.js
+5 verbose stack M  source/deserialize/index.js
+5 verbose stack M  source/reducer/__tests__/reducer-test.js
+5 verbose stack M  test/prismic.js
+5 verbose stack     at /Users/dan.henderson/.nvm/versions/node/v6.9.4/lib/node_modules/npm/lib/version.js:247:19
+5 verbose stack     at /Users/dan.henderson/.nvm/versions/node/v6.9.4/lib/node_modules/npm/lib/utils/no-progress-while-running.js:21:8
+5 verbose stack     at ChildProcess.exithandler (child_process.js:197:7)
+5 verbose stack     at emitTwo (events.js:106:13)
+5 verbose stack     at ChildProcess.emit (events.js:191:7)
+5 verbose stack     at maybeClose (internal/child_process.js:877:16)
+5 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+6 verbose cwd /Users/dan.henderson/Repos/prismic-utils
+7 error Darwin 15.6.0
+8 error argv "/Users/dan.henderson/.nvm/versions/node/v6.9.4/bin/node" "/Users/dan.henderson/.nvm/versions/node/v6.9.4/bin/npm" "version" "major"
+9 error node v6.9.4
+10 error npm  v3.10.10
+11 error Git working directory not clean.
+11 error M  readme.md
+11 error M  source/deserialize/__tests__/index.js
+11 error M  source/deserialize/index.js
+11 error M  source/reducer/__tests__/reducer-test.js
+11 error M  test/prismic.js
+12 error If you need help, you may report this error at:
+12 error     <https://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]

@@ -1,5 +1,6 @@
 import set from 'lodash/set'
 import reduce from 'lodash/reduce'
+import striptags from 'striptags'
 
 const deserializeDocument = (prismicDoc, options) => {
   const fields = mapFieldTypesToArray(prismicDoc)
@@ -32,8 +33,12 @@ const deserializeField = (prismicDoc, { key, type }, options = {}) => {
 
     case 'StructuredText':
       const structuredText = prismicDoc.getStructuredText(key)
-      const htmlSerializer = getSerializer(key, options.htmlSerializers)
-      return structuredText && structuredText.asHtml({}, htmlSerializer)
+      if (key === 'title') {
+        return structuredText && structuredText.asHtml({}, (element, content) => striptags(content))
+      } else {
+        const htmlSerializer = getSerializer(key, options.htmlSerializers)
+        return structuredText && structuredText.asHtml({}, htmlSerializer)
+      }
 
     case 'Link.web':
       const link = prismicDoc.getLink(key)
