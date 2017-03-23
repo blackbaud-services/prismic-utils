@@ -10,6 +10,8 @@ module.exports = function () {
     [],
     null,
     null,
+    null,
+    [],
     {
       'page.title': {
         type: 'StructuredText',
@@ -40,6 +42,40 @@ module.exports = function () {
             type: 'paragraph'
           }
         ]
+      }
+    },
+    {
+      page: {
+        title: {
+          type: 'StructuredText',
+          value: [
+            {
+              text: 'Page Title',
+              type: 'heading1'
+            }
+          ]
+        },
+        name: {
+          type: 'Text',
+          value: 'Barry'
+        },
+        count: {
+          type: 'Number',
+          value: 50
+        },
+        content: {
+          type: 'StructuredText',
+          value: [
+            {
+              text: 'Heading 1',
+              type: 'heading1'
+            },
+            {
+              text: 'Paragraph content',
+              type: 'paragraph'
+            }
+          ]
+        }
       }
     }
   )
