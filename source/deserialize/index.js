@@ -99,7 +99,6 @@ const deserializeField = (prismicDoc, { key, type }, options = {}) => {
 
 const mapFieldTypesToArray = ({
   data,
-  type,
   ...props
 }) => {
   // add document level fields
@@ -113,9 +112,9 @@ const mapFieldTypesToArray = ({
   ), [])
 
   // add normal fields
-  const fields = reduce(data[type], (fields, value, key) => (
+  const fields = reduce(data, (fields, value, key) => (
     fields.concat({
-      key: `${type}.${key}`,
+      key: key,
       type: value.type
     })
   ), documentFields)

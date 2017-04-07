@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.2",
-    "prismic.io": "^3.5.3",
+    "prismic.io": "3.5.5",
     "sinon": "^1.17.7",
     "striptags": "^2.1.1"
   },

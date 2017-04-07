@@ -1,17 +1,18 @@
 var Prismic = require('prismic.io')
 
+// function Document(id, uid, type, href, tags, slugs, firstPublicationDate, lastPublicationDate, lang, alternateLanguages, data, rawJSON) {
 module.exports = function () {
   return new Prismic.Document(
-    'document-id',
-    'document-uid',
-    'page',
-    null,
-    [],
-    [],
-    null,
-    null,
-    null,
-    [],
+    'document-id', // id
+    'document-uid', // uid
+    'page', // type
+    null, // href
+    [], // tags
+    [], // slugs
+    null, // firstPublicationDate
+    null, // lastPublicationDate
+    null, // lang
+    [], // alternateLanguages
     {
       'page.title': {
         type: 'StructuredText',
@@ -43,7 +44,7 @@ module.exports = function () {
           }
         ]
       }
-    },
+    }, // data
     {
       page: {
         title: {
@@ -77,6 +78,6 @@ module.exports = function () {
           ]
         }
       }
-    }
+    } // rawJson
   )
 }
