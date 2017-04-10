@@ -1,6 +1,6 @@
 {
   "name": "prismic-utils",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "A collection of functions for parsing data from a Prismic CMS",
   "main": "dist/index.js",
   "scripts": {
