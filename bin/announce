@@ -9,7 +9,7 @@ ${SLACK_WEBHOOK_URL} \
 -d @/dev/stdin <<JSON
 {
   "text": "Prismic Utils version released :tada:",
-  "channel": "#profs-dev",
+  "channel": "#edh-profs-dev",
   "username": "Prismic Utils",
   "icon_emoji": ":${SLACK_ANNOUNCE_EMOJI}:"
 }
