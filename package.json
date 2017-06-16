@@ -1,6 +1,6 @@
 {
   "name": "prismic-utils",
-  "version": "3.0.6",
+  "version": "3.0.7",
   "description": "A collection of functions for parsing data from a Prismic CMS",
   "main": "dist/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
   "dependencies": {
     "lodash": "^4.17.2",
     "prismic.io": "3.5.5",
-    "sinon": "^1.17.7",
+    "sinon": "^2.3.2",
     "striptags": "^2.1.1"
   },
   "standard": {
