@@ -1,5 +1,6 @@
 import set from 'lodash/set'
 import reduce from 'lodash/reduce'
+import sortBy from 'lodash/sortBy'
 import striptags from 'striptags'
 
 const deserializeDocument = (prismicDoc, options) => {
@@ -123,7 +124,7 @@ const mapFieldTypesToArray = ({
 
 const mapFieldsToObject = (fields) => (
   // turn into an object, respecting nested keys e.g. about-myTitle = about.myTitle
-  fields.reduce((data, { key, value }) => {
+  sortBy(fields, ['key']).reduce((data, { key, value }) => {
     const keyParts = key.split('.')
     const keyName = keyParts.length > 1 ? keyParts[1] : keyParts[0]
     const nestedStructure = keyName.split('-').join('.')
