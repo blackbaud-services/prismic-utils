@@ -23,6 +23,10 @@ module.exports = function () {
           }
         ]
       },
+      'page.timestamp': {
+        type: 'Timestamp',
+        value: '2017-01-01T00:00:00+0000'
+      },
       'page.name': {
         type: 'Text',
         value: 'Barry'
@@ -55,6 +59,10 @@ module.exports = function () {
               type: 'heading1'
             }
           ]
+        },
+        timestamp: {
+          type: 'Timestamp',
+          value: '2017-01-01T00:00:00+0000'
         },
         name: {
           type: 'Text',
