@@ -21,6 +21,11 @@ describe ('Deserialize', () => {
     expect(page.count).to.eql(50)
   })
 
+  it ('should deserialize a timestamp field', () => {
+    const page = deserializeDocument(doc)
+    expect(page.timestamp).to.eql('2017-01-01T00:00:00.000Z')
+  })
+
   it ('should use a basic default html serializer', () => {
     const page = deserializeDocument(doc)
     expect(page.content).to.contain('<h1>Heading 1</h1>')

@@ -92,6 +92,10 @@ const deserializeField = (prismicDoc, { key, type }, options = {}) => {
       const video = prismicDoc.get(key)
       return video && video.asHtml()
 
+    case 'Timestamp':
+      const timestamp = prismicDoc.get(key)
+      return timestamp && timestamp.value && timestamp.value.toISOString()
+
     default:
       return type
   }
