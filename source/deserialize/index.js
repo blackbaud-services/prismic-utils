@@ -83,7 +83,12 @@ const deserializeField = (prismicDoc, { key, type }, options = {}) => {
 
     case 'Image':
       const image = prismicDoc.getImage(key)
-      return image && image.url
+      const { views = {} } = image
+
+      return image && {
+        main: image.main,
+        ...views
+      }
 
     case 'Color':
       return prismicDoc.getColor(key)
