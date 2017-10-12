@@ -23,6 +23,10 @@ module.exports = function () {
           }
         ]
       },
+      'page.date': {
+        type: 'Date',
+        value: '2017-01-01'
+      },
       'page.timestamp': {
         type: 'Timestamp',
         value: '2017-01-01T00:00:00+0000'
@@ -59,6 +63,10 @@ module.exports = function () {
               type: 'heading1'
             }
           ]
+        },
+        date: {
+          type: 'Date',
+          value: '2017-01-01'
         },
         timestamp: {
           type: 'Timestamp',
