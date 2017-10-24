@@ -1,0 +1,101 @@
+{
+  "id": "document-id",
+  "uid": "document-uid",
+  "type": "document-type",
+  "href": "https://www.example.com",
+  "tags": ["tag"],
+  "first_publication_date": "2010-01-01T00:00:00+0000",
+  "last_publication_date": "2010-01-01T00:00:00+0000",
+  "slugs": ["slug"],
+  "linked_documents": [{
+    "id": "linked"
+  }],
+  "lang": "en-us",
+  "alternate_languages": [],
+  "never_before_seen_property": "foo",
+  "data": {
+    "reactText": [
+      {
+        "type": "heading1",
+        "text": "Hi, this is a title",
+        "spans": []
+      }
+    ],
+    "image": {
+      "dimensions": {
+        "width": 100,
+        "height": 100
+      },
+      "alt": "foo bar",
+      "copyright": null,
+      "url": "https://wroomdev.s3.amazonaws.com/tutoblanktemplate%2F97109f41-140e-4dc9-a2c8-96fb10f14051_star.gif",
+      "mobile": {
+        "dimensions": {
+          "width": 1080,
+          "height": 800
+        },
+        "alt": "foo bar",
+        "copyright": null,
+        "url": "https://wroomdev.s3.amazonaws.com/tutoblanktemplate%2F97109f41-140e-4dc9-a2c8-96fb10f14051_star.gif"
+      }
+    },
+    "keyText": "key text",
+    "link-web": {
+      "link_type": "Web",
+      "url": "https://www.google.com.au",
+      "target": "_blank"
+    },
+    "link-media": {
+      "link_type": "Media",
+      "name": "star.gif",
+      "kind": "image",
+      "url": "https://wroomdev.s3.amazonaws.com/tutoblanktemplate%2F97109f41-140e-4dc9-a2c8-96fb10f14051_star.gif",
+      "size": "627291",
+      "height": "800",
+      "width": "960"
+    },
+    "link-document": {
+      "id": "WHMMTisAAHIPSsKH",
+      "type": "page",
+      "tags": [],
+      "slug": "sdfkljsdlfk",
+      "lang": "en-us",
+      "uid": "123",
+      "link_type": "Document",
+      "isBroken": false
+    },
+    "date-basic": "2010-01-01",
+    "date-timestamp": "2010-01-01T00:00:00+0000",
+    "color": "#FFFFFF",
+    "number": 2,
+    "select": "No",
+    "embed": {
+      "author_url": "https://www.youtube.com/user/cafemusicbgmchannel",
+      "version": "1.0",
+      "title": "#GhibliJazz#Cafe Music - Relaxing Jazz & Bossa Nova Music - Studio Ghibli Cover",
+      "author_name": "Cafe Music BGM channel",
+      "provider_url": "https://www.youtube.com/",
+      "width": 480,
+      "provider_name": "YouTube",
+      "thumbnail_height": 360,
+      "height": 270,
+      "type": "video",
+      "thumbnail_url": "https://i.ytimg.com/vi/3jWRrafhO7M/hqdefault.jpg",
+      "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/3jWRrafhO7M?feature=oembed\" frameborder=\"0\" allowfullscreen></iframe>",
+      "thumbnail_width": 480,
+      "embed_url": "https://www.youtube.com/watch?v=3jWRrafhO7M&t=7485s"
+    },
+    "group": [
+      {
+        "text": [
+          {
+            "type": "heading1",
+            "text": "foo",
+            "spans": []
+          }
+        ]
+      }
+    ],
+    "body": []
+  }
+}

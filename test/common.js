@@ -11,6 +11,4 @@ global.beforeEach = mocha.beforeEach
 
 global.sinon = require('sinon')
 
-global.createPrismicDocument = require('./prismic')
-
 global.PRISMIC_REPO = 'utils-test'
