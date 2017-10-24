@@ -96,6 +96,26 @@
         ]
       }
     ],
-    "body": []
+    "slices": [
+      {
+        "slice_type": "foo",
+        "slice_label": "bar",
+        "items": [
+          {
+            "nested-text": "Hi I am nested",
+            "rich-text": [
+              {
+                "type": "heading1",
+                "text": "foo",
+                "spans": []
+              }
+            ]
+          }
+        ],
+        "primary": {
+          "special-number": 4
+        }
+      }
+    ]
   }
 }
