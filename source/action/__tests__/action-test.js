@@ -6,6 +6,7 @@ import { createDocumentAction, createDocumentsAction } from '..'
 
 describe('Create Document Action', () => {
   let dispatch, spy, fetchSingle, fetchMultiple // eslint-disable-line
+  const sampleError = new Error('error')
 
   before(() => {
     fetchMultiple = sinon.stub(fetch, 'fetchDocuments', () => {
@@ -66,12 +67,12 @@ describe('Create Document Action', () => {
     fetchSingle.restore()
 
     sinon.stub(fetch, 'fetchDocument', () => {
-      return Promise.reject('error')
+      return Promise.reject(sampleError)
     })
 
     dispatch(createDocumentAction('page'))
       .catch((error) => {
-        assert.equal(error, 'error')
+        assert.deepEqual(error, sampleError)
         done()
       })
   })
@@ -80,14 +81,14 @@ describe('Create Document Action', () => {
     fetchSingle.restore()
 
     sinon.stub(fetch, 'fetchDocument', () => {
-      return Promise.reject('error')
+      return Promise.reject(sampleError)
     })
 
     dispatch(createDocumentAction('page'))
       .catch(() => {
         const action = spy.secondCall.args[0]
         assert.equal(action.type, 'page/FETCH_FAILURE')
-        assert.equal(action.payload.error, 'error')
+        assert.deepEqual(action.payload.error, sampleError)
         done()
       })
   })
