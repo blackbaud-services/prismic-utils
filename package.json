@@ -28,7 +28,6 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.9.0",
-    "chai": "^3.5.0",
     "mocha": "^2.5.3",
     "standard": "^8.0.0"
   },

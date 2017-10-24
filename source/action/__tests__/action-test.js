@@ -1,8 +1,11 @@
+/* eslint-env mocha */
+import assert from 'assert'
+import sinon from 'sinon'
 import * as fetch from '../../fetch'
 import { createDocumentAction, createDocumentsAction } from '..'
 
 describe('Create Document Action', () => {
-  let dispatch, spy, fetchSingle, fetchMultiple
+  let dispatch, spy, fetchSingle, fetchMultiple // eslint-disable-line
 
   before(() => {
     fetchMultiple = sinon.stub(fetch, 'fetchDocuments', () => {
@@ -21,13 +24,13 @@ describe('Create Document Action', () => {
 
   it('should create us a simple action creator', () => {
     const actionCreator = createDocumentAction('page')
-    expect(typeof actionCreator).to.eql('function')
+    assert.equal(typeof actionCreator, 'function')
   })
 
   it('should resolve to the fetched data', (done) => {
     dispatch(createDocumentAction('page'))
       .then((data) => {
-        expect(data.foo).to.eql('bar')
+        assert.equal(data.foo, 'bar')
         done()
       })
   })
@@ -35,7 +38,7 @@ describe('Create Document Action', () => {
   it('should dispatch two actions', (done) => {
     dispatch(createDocumentAction('page'))
       .then(() => {
-        expect(spy.callCount).to.eql(2)
+        assert.equal(spy.callCount, 2)
         done()
       })
   })
@@ -44,7 +47,7 @@ describe('Create Document Action', () => {
     dispatch(createDocumentAction('page'))
       .then((data) => {
         const action = spy.firstCall.args[0]
-        expect(action.type).to.eql('page/FETCH')
+        assert.equal(action.type, 'page/FETCH')
         done()
       })
   })
@@ -53,8 +56,8 @@ describe('Create Document Action', () => {
     dispatch(createDocumentAction('page'))
       .then((data) => {
         const action = spy.secondCall.args[0]
-        expect(action.type).to.eql('page/FETCH_SUCCESS')
-        expect(action.payload.data).to.eql({ foo: 'bar' })
+        assert.equal(action.type, 'page/FETCH_SUCCESS')
+        assert.deepEqual(action.payload.data, { foo: 'bar' })
         done()
       })
   })
@@ -68,7 +71,7 @@ describe('Create Document Action', () => {
 
     dispatch(createDocumentAction('page'))
       .catch((error) => {
-        expect(error).to.eql('error')
+        assert.equal(error, 'error')
         done()
       })
   })
@@ -81,10 +84,10 @@ describe('Create Document Action', () => {
     })
 
     dispatch(createDocumentAction('page'))
-      .catch((error) => {
+      .catch(() => {
         const action = spy.secondCall.args[0]
-        expect(action.type).to.eql('page/FETCH_FAILURE')
-        expect(action.payload.error).to.eql('error')
+        assert.equal(action.type, 'page/FETCH_FAILURE')
+        assert.equal(action.payload.error, 'error')
         done()
       })
   })
@@ -93,10 +96,10 @@ describe('Create Document Action', () => {
     dispatch(createDocumentsAction('page'))
       .then((data) => {
         const action = spy.secondCall.args[0]
-        expect(action.type).to.eql('page/FETCH_SUCCESS')
-        expect(action.payload.data.length).to.eql(2)
-        expect(action.payload.data[0]).to.eql({ foo: 'bar' })
-        expect(action.payload.data[1]).to.eql({ foo: 'baz' })
+        assert.equal(action.type, 'page/FETCH_SUCCESS')
+        assert.equal(action.payload.data.length, 2)
+        assert.deepEqual(action.payload.data[0], { foo: 'bar' })
+        assert.deepEqual(action.payload.data[1], { foo: 'baz' })
         done()
       })
   })
