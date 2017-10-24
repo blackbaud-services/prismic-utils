@@ -1,62 +1,49 @@
-import {
-  deserializeDocument
-} from '../../index'
+/* eslint-env mocha */
+import assert from 'assert'
+import deserializeDocument from '../'
+import rawDocument from '../../../test/prismic.json'
 
-describe ('Deserialize', () => {
-  const doc = createPrismicDocument()
+const document = deserializeDocument(rawDocument)
+const { data } = document
 
-  it ('should deserialize a document', () => {
-    const page = deserializeDocument(doc)
-    expect(page.id).to.eql('document-id')
-    expect(page.uid).to.eql('document-uid')
+describe('Deserialize', () => {
+  it('retains document metadata', () => {
+    assert.equal(document.id, 'document-id')
+    assert.equal(document.uid, 'document-uid')
+    assert.equal(document.never_before_seen_property, 'foo')
   })
 
-  it ('should deserialize a text field', () => {
-    const page = deserializeDocument(doc)
-    expect(page.name).to.eql('Barry')
+  it('leaves Key Text untreated', () => {
+    assert.equal(data.keyText, rawDocument.data.keyText)
   })
 
-  it ('should deserialize a number field', () => {
-    const page = deserializeDocument(doc)
-    expect(page.count).to.eql(50)
+  it('leaves Image untreated', () => {
+    assert.deepEqual(data.image, rawDocument.data.image)
   })
 
-  it ('should deserialize a date field', () => {
-    const page = deserializeDocument(doc)
-    expect(page.date).to.eql('2017-01-01T00:00:00.000Z')
+  it('leaves Links untreated', () => {
+    assert.deepEqual(data.link.web, rawDocument.data['link-web'])
+    assert.deepEqual(data.link.media, rawDocument.data['link-media'])
+    assert.deepEqual(data.link.document, rawDocument.data['link-document'])
   })
 
-  it ('should deserialize a timestamp field', () => {
-    const page = deserializeDocument(doc)
-    expect(page.timestamp).to.eql('2017-01-01T00:00:00.000Z')
+  it('leaves Date untreated', () => {
+    assert.equal(data.date.basic, rawDocument.data['date-basic'])
   })
 
-  it ('should use a basic default html serializer', () => {
-    const page = deserializeDocument(doc)
-    expect(page.content).to.contain('<h1>Heading 1</h1>')
-    expect(page.content).to.contain('<p>Paragraph content</p>')
+  it('leaves Timestamp untreated', () => {
+    assert.equal(data.date.timestamp, rawDocument.data['date-timestamp'])
   })
 
-  it ('should use a supplied html serializer', () => {
-    const deserializer = ({ type, text }) => {
-      if (type = 'heading1') {
-        return '<h1>Test Me</h1>'
-      }
-      return null
-    }
-
-    const page = deserializeDocument(doc, {
-      htmlSerializers: {
-        'page.content': deserializer
-      }
-    })
-
-    expect(page.content).to.contain('<h1>Test Me</h1>')
-    expect(page.content).to.not.contain('<h1>Heading 1</h1>')
+  it('leaves Color untreated', () => {
+    assert.equal(data.color, rawDocument.data.color)
   })
 
-  it ('should do get the clean text from the a StructuredText title field', () => {
-    const page = deserializeDocument(doc)
-    expect(page.title).to.contain('Page Title')
+  it('leaves Number untreated', () => {
+    assert.equal(data.number, rawDocument.data.number)
+  })
+
+  it('leaves Embed untreated', () => {
+    assert.equal(data.embed, rawDocument.data.embed)
   })
 })

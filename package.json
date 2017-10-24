@@ -41,8 +41,6 @@
   },
   "standard": {
     "ignore": [
-      "**/__tests__/",
-      "/test/",
       "/dist/"
     ]
   }
