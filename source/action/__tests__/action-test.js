@@ -9,11 +9,11 @@ describe('Create Document Action', () => {
   const sampleError = new Error('error')
 
   before(() => {
-    fetchMultiple = sinon.stub(fetch, 'fetchDocuments', () => {
+    fetchMultiple = sinon.stub(fetch, 'fetchDocuments').callsFake(() => {
       return Promise.resolve([{ foo: 'bar' }, { foo: 'baz' }])
     })
 
-    fetchSingle = sinon.stub(fetch, 'fetchDocument', () => {
+    fetchSingle = sinon.stub(fetch, 'fetchDocument').callsFake(() => {
       return Promise.resolve({ foo: 'bar' })
     })
 
@@ -66,7 +66,7 @@ describe('Create Document Action', () => {
   it('should propogate errors correctly', (done) => {
     fetchSingle.restore()
 
-    sinon.stub(fetch, 'fetchDocument', () => {
+    sinon.stub(fetch, 'fetchDocument').callsFake(() => {
       return Promise.reject(sampleError)
     })
 
@@ -80,7 +80,7 @@ describe('Create Document Action', () => {
   it('should dispatch an failure action', (done) => {
     fetchSingle.restore()
 
-    sinon.stub(fetch, 'fetchDocument', () => {
+    sinon.stub(fetch, 'fetchDocument').callsFake(() => {
       return Promise.reject(sampleError)
     })
 
