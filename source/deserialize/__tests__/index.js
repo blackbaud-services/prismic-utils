@@ -46,4 +46,16 @@ describe('Deserialize', () => {
   it('leaves Embed untreated', () => {
     assert.equal(data.embed, rawDocument.data.embed)
   })
+
+  it('performs on Slice fields', () => {
+    assert.equal(
+      data.slices[0].items[0].nested.text,
+      rawDocument.data.slices[0].items[0]['nested-text']
+    )
+
+    assert.equal(
+      data.slices[0].primary.special.number,
+      rawDocument.data.slices[0].primary['special-number']
+    )
+  })
 })

@@ -24,6 +24,18 @@ const deserializeField = (value, options = {}) => {
   if (isArray(value) && value.length > 0 && value[0].type) {
     // Rich Text
     return RichText.render(value)
+  } else if (isArray(value) && value.length > 0 && value[0].slice_type) {
+    // Slice
+    return value.map((slice) => ({
+      type: slice.slice_type,
+      label: slice.slice_label,
+      primary: mapFieldsToObject(
+        deserializeFields(slice.primary)
+      ),
+      items: slice.items.map((item) => (
+        mapFieldsToObject(deserializeFields(item))
+      ))
+    }))
   } else if (isArray(value) && value.length > 0 && !value[0].type) {
     // Groups
     return value.map((group) => deserializeFields(group))
