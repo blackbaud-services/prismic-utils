@@ -44,11 +44,7 @@ const page = deserializeDocument(doc, options)
 
 `options`: additional options
 
-- `htmlSerializers`: custom html serializers for specific fields
-
-```
-htmlSerializers: { 'page.content': myCustomSerializer }
-```
+- `react` (boolean, default `true`): whether or not Rich Text should be converted to React Components.
 
 **Nest deserialized data**
 
@@ -113,11 +109,6 @@ dispatch(createDocumentsAction('page', options))
 
 `options`: additional options that will be used by fetchDocuments
 
-- `type`: the type of document to fetch e.g. page
-- `fields`: an array of objects containing predicates e.g. [{ field: 'uid', value: 'my-uid' }]
-- `orderings`: an array of order string e.g. ['my.page.title desc']  
-- `token`: the document ref to fetch (defaults to Api.master())
-
 `createDocumentAction` is the same as `createDocumentsAction`, except it will only retrieve and return a single document.
 
 ---
@@ -137,13 +128,13 @@ fetchDocuments(options)
 
 **Params**
 
-`options`: various options to use when fetching
+`options`: various options to use when fetching:
 
-- `repository`: the name of the Prismic repository e.g. my-repository
 - `type`: the type of document to fetch e.g. page
-- `fields`: an array of objects containing predicates e.g. [{ field: 'uid', value: 'my-uid' }]
-- `orderings`: an array of order string e.g. ['my.page.title desc']  
 - `token`: the document ref to fetch (defaults to Api.master())
+- `options`: Query options, as in https://prismic.io/docs/javascript/query-the-api/query-options-reference
+-  `predicates` (string | array): Predicates options, as in https://prismic.io/docs/javascript/query-the-api/query-predicates-reference
+- `repository`: Repository to query from
 
 ### `fetchDocument`
 
@@ -155,9 +146,3 @@ import { fetchDocument } from 'prismic-utils'
 fetchDocument(options)
 	.then((doc) => doc)
 ```
-
----
-
-## Todo
-
-- Doesn't like slices that aren't groups
