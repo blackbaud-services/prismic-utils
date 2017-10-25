@@ -7,6 +7,10 @@ steps:
 
   - wait
 
+  - name: ":shipit: Deploy Documentation"
+    command: "docker-compose run --rm build bin/only-for-version-releases bin/deploy-docs"
+    branches: master
+
   - name: ":shipit: Deploy It"
     command: "docker-compose run --rm build bin/deploy"
     branches: master

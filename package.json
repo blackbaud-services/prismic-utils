@@ -5,10 +5,13 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "babel source -d dist --ignore '**/__tests__/*'",
-    "test:lint": "standard -d source",
-    "test:unit": "mocha source/**/**/__tests__/*.js --compilers js:babel-register",
+    "docs": "documentation build source/** -f html -o docs",
+    "docs:publish": "npm run docs && gh-pages -d docs",
+    "docs:watch": "nodemon --ignore docs/ --exec 'npm run docs'",
+    "prepublish": "npm test && npm run build",
     "test": "npm run test:lint && npm run test:unit",
-    "prepublish": "npm test && npm run build"
+    "test:lint": "standard -d source",
+    "test:unit": "mocha source/**/**/__tests__/*.js --compilers js:babel-register"
   },
   "files": [
     "dist"
@@ -31,6 +34,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.9.0",
+    "documentation": "^5.3.3",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-15": "^1.0.2",
     "eslint-plugin-flowtype": "^2.39.1",
@@ -38,6 +42,7 @@
     "flow-typed": "^2.2.0",
     "jsdom": "^11.3.0",
     "mocha": "^2.5.3",
+    "nodemon": "^1.12.1",
     "standard": "^10.0.3"
   },
   "dependencies": {
