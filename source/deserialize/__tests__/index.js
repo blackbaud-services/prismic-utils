@@ -13,6 +13,7 @@ global.navigator = { userAgent: 'node.js' }
 
 Enzyme.configure({ adapter: new Adapter() })
 
+const htmlDocument = deserializeDocument(rawDocument, {react: false})
 const document = deserializeDocument(rawDocument)
 const { data } = document
 
@@ -29,6 +30,18 @@ describe('Deserialize', () => {
 
     assert.equal(heading.length, 1)
     assert.equal(heading.text(), 'Hi, this is a title')
+  })
+
+  it('converts Rich Text to HTML, when React is disabled', () => {
+    const html = htmlDocument.data.reactText
+
+    assert.equal(html, '<h1>Hi, this is a title</h1>')
+  })
+
+  it('converts nested Rich Text to HTML, when React is disabled', () => {
+    const html = htmlDocument.data.slices[0].items[0].rich.text
+
+    assert.equal(html, '<h1>foo</h1>')
   })
 
   it('leaves Key Text untreated', () => {

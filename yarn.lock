@@ -2742,6 +2742,13 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
+prismic-dom@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/prismic-dom/-/prismic-dom-2.0.6.tgz#527efeaa5e8a93f5c6a1db93fb569e716349fbb9"
+  dependencies:
+    prismic-helpers "^1.0.0"
+    prismic-richtext "^0.2.6"
+
 prismic-helpers@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/prismic-helpers/-/prismic-helpers-1.0.0.tgz#8337420cf187f55fb7b7a8be755523c8696fc329"
