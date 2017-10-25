@@ -17,7 +17,7 @@ const buildPredicates = (
  * @property {string} [token] query token, defaults to `api.master()`, the latest published version of documents
  * @property {string} [type] document type
  */
-type FetchOptions = {
+export type FetchOptions = {
   options?: {},
   predicates?: string | Array<string>,
   repository: string,
