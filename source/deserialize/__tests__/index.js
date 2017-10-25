@@ -2,6 +2,16 @@
 import assert from 'assert'
 import deserializeDocument from '../'
 import rawDocument from '../../../test/prismic.json'
+import Adapter from 'enzyme-adapter-react-15'
+import Enzyme, { mount } from 'enzyme'
+import { JSDOM } from 'jsdom'
+
+const { window } = new JSDOM('<!doctype html><html><body></body></html>')
+global.window = window
+global.document = window.document
+global.navigator = { userAgent: 'node.js' }
+
+Enzyme.configure({ adapter: new Adapter() })
 
 const document = deserializeDocument(rawDocument)
 const { data } = document
@@ -11,6 +21,14 @@ describe('Deserialize', () => {
     assert.equal(document.id, 'document-id')
     assert.equal(document.uid, 'document-uid')
     assert.equal(document.never_before_seen_property, 'foo')
+  })
+
+  it('converts Rich Text to React Components', () => {
+    const wrapper = mount(data.reactText)
+    const heading = wrapper.find('h1')
+
+    assert.equal(heading.length, 1)
+    assert.equal(heading.text(), 'Hi, this is a title')
   })
 
   it('leaves Key Text untreated', () => {
@@ -57,5 +75,13 @@ describe('Deserialize', () => {
       data.slices[0].primary.special.number,
       rawDocument.data.slices[0].primary['special-number']
     )
+  })
+
+  it('performs on Rich Text in Slices', () => {
+    const wrapper = mount(data.slices[0].items[0].rich.text)
+    const heading = wrapper.find('h1')
+
+    assert.equal(heading.length, 1)
+    assert.equal(heading.text(), 'foo')
   })
 })
