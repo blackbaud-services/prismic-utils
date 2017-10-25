@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import deserializeDocument from '../'
+import deserializeDocument, { componentAsText } from '../'
 import rawDocument from '../../../test/prismic.json'
 import Adapter from 'enzyme-adapter-react-15'
 import Enzyme, { mount } from 'enzyme'
@@ -83,5 +83,11 @@ describe('Deserialize', () => {
 
     assert.equal(heading.length, 1)
     assert.equal(heading.text(), 'foo')
+  })
+})
+
+describe('Component as text', () => {
+  it('removes surrounding tags, leaving only text', () => {
+    assert.equal(componentAsText(data.reactText), 'Hi, this is a title')
   })
 })
