@@ -23,14 +23,16 @@ const deserializeFields = (fields, options) => (
   }))
 )
 
+const isRichText = (value) => isArray(value) && value.length > 0 && value[0].type
+const isSlice = (value) => isArray(value) && value.length > 0 && value[0].slice_type
+const isGroup = (value) => isArray(value) && value.length > 0 && !value[0].type
+
 const deserializeField = (value, options) => {
-  if (isArray(value) && value.length > 0 && value[0].type) {
-    // Rich Text
+  if (isRichText(value)) {
     return options.react
       ? ReactText.render(value)
       : RichText.asHtml(value)
-  } else if (isArray(value) && value.length > 0 && value[0].slice_type) {
-    // Slice
+  } else if (isSlice(value)) {
     return value.map((slice) => ({
       type: slice.slice_type,
       label: slice.slice_label,
@@ -41,8 +43,7 @@ const deserializeField = (value, options) => {
         mapFieldsToObject(deserializeFields(item, options))
       ))
     }))
-  } else if (isArray(value) && value.length > 0 && !value[0].type) {
-    // Groups
+  } else if (isGroup(value)) {
     return value.map((group) => deserializeFields(group, options))
   } else {
     return value
