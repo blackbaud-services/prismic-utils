@@ -1,8 +1,10 @@
 import isArray from 'lodash/isArray'
 import set from 'lodash/set'
 import sortBy from 'lodash/sortBy'
+import striptags from 'striptags'
 import toPairs from 'lodash/toPairs'
 import { RichText } from 'prismic-reactjs'
+import { renderToStaticMarkup } from 'react-dom/server'
 
 const deserializeDocument = ({ data, ...metadata }) => {
   const deserializedFields = deserializeFields(data)
@@ -52,6 +54,10 @@ const mapFieldsToObject = (fields) => (
     const nestedStructure = keyName.split('-').join('.')
     return set(data, nestedStructure, value)
   }, {})
+)
+
+export const componentAsText = (component) => (
+  striptags(renderToStaticMarkup(component))
 )
 
 export default deserializeDocument
