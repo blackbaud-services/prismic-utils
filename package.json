@@ -17,7 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/everydayhero/prismic-utils.git"
   },
-  "author": "Ellis Clayton <ellis@ellisclayton.info>",
+  "author": "@everydayhero",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/everydayhero/prismic-utils/issues"
