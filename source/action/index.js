@@ -5,13 +5,14 @@ import {
 } from '../fetch'
 import type { FetchOptions } from '../fetch'
 
-type Action = {|
+export type Action = {|
   +type: string,
   payload?: any
 |}
 
-type State = {
-  status: string
+export type State = {
+  status?: string,
+  data?: Array<{}> | {}
 }
 
 /* eslint-disable no-use-before-define */
