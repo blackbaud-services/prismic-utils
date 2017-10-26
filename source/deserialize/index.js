@@ -1,4 +1,5 @@
-import isArray from 'lodash/isArray'
+// @flow
+import * as React from 'react'
 import set from 'lodash/set'
 import sortBy from 'lodash/sortBy'
 import striptags from 'striptags'
@@ -7,7 +8,31 @@ import { RichText as ReactText } from 'prismic-reactjs'
 import { RichText } from 'prismic-dom'
 import { renderToStaticMarkup } from 'react-dom/server'
 
-const deserializeDocument = ({ data, ...metadata }, options = { react: true }) => {
+const { isArray } = Array
+
+type PrismicResponse = {data: {}}
+
+/**
+ * Options for custom deserialization
+ * @name DeserializationOptions
+ * @property {boolean} [react] whether to convert Rich Text to React Components
+ */
+type DeserializationOptions = {
+  react: boolean
+}
+
+/**
+ * Converts Prismic document into a nested object structure
+ * @name fetchDocuments
+ * @function
+ * @param {Object} document a Prismic document
+ * @param {DeserializationOptions} options
+ * @returns {Object} A deserialized Prismic Document
+ */
+const deserializeDocument = (
+  { data, ...metadata }: PrismicResponse,
+  options: DeserializationOptions = {react: true}
+) => {
   const deserializedFields = deserializeFields(data, options)
 
   return {
@@ -16,16 +41,19 @@ const deserializeDocument = ({ data, ...metadata }, options = { react: true }) =
   }
 }
 
-const deserializeFields = (fields, options) => (
-  toPairs(fields).map(([ key, value ]) => ({
+const deserializeFields = (
+  fields: {},
+  options: DeserializationOptions
+) => (
+  toPairs(fields).map(([ key, value ]: [ string, any ]) => ({
     key,
     value: deserializeField(value, options)
   }))
 )
 
-const isRichText = (value) => isArray(value) && value.length > 0 && value[0].type
-const isSlice = (value) => isArray(value) && value.length > 0 && value[0].slice_type
-const isGroup = (value) => isArray(value) && value.length > 0 && !value[0].type
+const isRichText = (value: any): boolean => isArray(value) && value.length > 0 && value[0].type
+const isSlice = (value: any): boolean => isArray(value) && value.length > 0 && value[0].slice_type
+const isGroup = (value: any): boolean => isArray(value) && value.length > 0 && !value[0].type
 
 const deserializeField = (value, options) => {
   if (isRichText(value)) {
@@ -60,7 +88,10 @@ const mapFieldsToObject = (fields) => (
   }, {})
 )
 
-export const componentAsText = (component) => (
+/**
+ * Removes HTML tags from a React Coponent
+ */
+export const componentAsText = (component: React.Node): string => (
   striptags(renderToStaticMarkup(component))
 )
 
