@@ -17,7 +17,7 @@ const defaultHandleFailure = (c, error) => ({
   payload: { error }
 })
 
-export const createDocumentsAction = (namespace, options = {}) => (dispatch) => {
+export const createDocumentsAction = (namespace, options = {}) => (dispatch, getState) => {
   const c = {
     FETCH: `${namespace}/FETCH`,
     FETCH_SUCCESS: `${namespace}/FETCH_SUCCESS`,
@@ -29,12 +29,16 @@ export const createDocumentsAction = (namespace, options = {}) => (dispatch) => 
     handleFetch = defaultHandleFetch,
     handleFetchSuccess = defaultHandleSuccess,
     handleFetchFailure = defaultHandleFailure,
+    token,
     ...params
   } = options
 
   dispatch(handleFetch(c))
 
-  return fetch(params)
+  return fetch({
+    ...params,
+    token: getApiToken(token, getState())
+  })
     .then((data) => {
       dispatch(handleFetchSuccess(c, data))
       return Promise.resolve(data)
@@ -50,4 +54,13 @@ export const createDocumentAction = (namespace, options) => {
     ...options,
     fetch: fetchDocument
   })
+}
+
+const getApiToken = (token, state) => {
+  switch (typeof token) {
+    case 'function':
+      return token(state)
+    default:
+      return token
+  }
 }

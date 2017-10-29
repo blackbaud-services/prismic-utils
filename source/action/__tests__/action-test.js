@@ -15,7 +15,8 @@ describe('Create Document Action', () => {
 
     dispatch = (action) => {
       spy = sinon.spy()
-      return action(spy)
+      const getState = () => ({ prismic: { token: 'STORE_TOKEN' } })
+      return action(spy, getState)
     }
   })
 
@@ -97,6 +98,34 @@ describe('Create Document Action', () => {
         expect(action.payload.data.length).to.eql(2)
         expect(action.payload.data[0]).to.eql({ foo: 'bar' })
         expect(action.payload.data[1]).to.eql({ foo: 'baz' })
+        done()
+      })
+  })
+
+  it('will pass in a basic API token', (done) => {
+    fetchSingle.restore()
+    const fetchStub = sinon.stub(fetch, 'fetchDocument').callsFake(() => {
+      return Promise.resolve({})
+    })
+
+    dispatch(createDocumentAction('page', { token: 'STRING_TOKEN' }))
+      .then((data) => {
+        const args = fetchStub.firstCall.args[0]
+        expect(args.token).to.eql('STRING_TOKEN')
+        done()
+      })
+  })
+
+  it('will grab a token out of the store', (done) => {
+    fetchSingle.restore()
+    const fetchStub = sinon.stub(fetch, 'fetchDocument').callsFake(() => {
+      return Promise.resolve({})
+    })
+
+    dispatch(createDocumentAction('page', { token: (state) => state.prismic.token }))
+      .then((data) => {
+        const args = fetchStub.firstCall.args[0]
+        expect(args.token).to.eql('STORE_TOKEN')
         done()
       })
   })
