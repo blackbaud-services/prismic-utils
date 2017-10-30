@@ -1,7 +1,9 @@
 {
   "name": "prismic-utils",
-  "version": "4.1.1",
-  "publishConfig": { "tag": "4.x" },
+  "version": "4.1.2",
+  "publishConfig": {
+    "tag": "4.x"
+  },
   "description": "A collection of functions for parsing data from a Prismic CMS",
   "main": "dist/index.js",
   "scripts": {
