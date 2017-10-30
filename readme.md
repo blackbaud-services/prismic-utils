@@ -106,6 +106,7 @@ dispatch(createDocumentsAction('page', options))
 - `pages/FETCH` when the request is being fired off
 - `pages/FETCH_SUCCESS` when the request is fulfilled, with the data key of the payload containing the found documents
 - `pages/FETCH_FAILURE` if there was an error during the request
+- `token` can be an actual token, or you can pass in a function that will be called with the redux store, so you can retrieve your token from your store
 
 `options`: additional options that will be used by fetchDocuments
 
