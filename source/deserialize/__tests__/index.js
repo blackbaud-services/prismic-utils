@@ -90,6 +90,12 @@ describe('Deserialize', () => {
     )
   })
 
+  it('performs on Groups', () => {
+    assert.equal(data.group.length, 1)
+    assert.equal(data.group[0].text, 'Example Text')
+    assert.equal(data.group[0].number, 9)
+  })
+
   it('performs on Rich Text in Slices', () => {
     const wrapper = mount(data.slices[0].items[0].rich.text)
     const heading = wrapper.find('h1')

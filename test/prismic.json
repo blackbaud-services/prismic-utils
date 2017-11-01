@@ -87,13 +87,8 @@
     },
     "group": [
       {
-        "text": [
-          {
-            "type": "heading1",
-            "text": "foo",
-            "spans": []
-          }
-        ]
+        "text": "Example Text",
+        "number": 9
       }
     ],
     "slices": [
