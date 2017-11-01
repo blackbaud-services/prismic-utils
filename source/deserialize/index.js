@@ -44,7 +44,10 @@ const deserializeField = (value, options) => {
       ))
     }))
   } else if (isGroup(value)) {
-    return value.map((group) => deserializeFields(group, options))
+    return value.map((group) => {
+      const deserializedFields = deserializeFields(group, options)
+      return mapFieldsToObject(deserializedFields)
+    })
   } else {
     return value
   }
