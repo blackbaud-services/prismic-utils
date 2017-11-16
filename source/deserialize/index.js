@@ -1,11 +1,8 @@
 import isArray from 'lodash/isArray'
 import set from 'lodash/set'
 import sortBy from 'lodash/sortBy'
-import striptags from 'striptags'
 import toPairs from 'lodash/toPairs'
-import { RichText as ReactText } from 'prismic-reactjs'
 import { RichText } from 'prismic-dom'
-import { renderToStaticMarkup } from 'react-dom/server'
 
 const deserializeDocument = ({ data, ...metadata }, options = { react: true }) => {
   const deserializedFields = deserializeFields(data, options)
@@ -29,9 +26,10 @@ const isGroup = (value) => isArray(value) && value.length > 0 && !value[0].type
 
 const deserializeField = (value, options) => {
   if (isRichText(value)) {
-    return options.react
-      ? ReactText.render(value)
-      : RichText.asHtml(value)
+    return {
+      data: value,
+      html: RichText.asHtml(value)
+    }
   } else if (isSlice(value)) {
     return value.map((slice) => ({
       type: slice.slice_type,
@@ -61,10 +59,6 @@ const mapFieldsToObject = (fields) => (
     const nestedStructure = keyName.split('-').join('.')
     return set(data, nestedStructure, value)
   }, {})
-)
-
-export const componentAsText = (component) => (
-  striptags(renderToStaticMarkup(component))
 )
 
 export default deserializeDocument

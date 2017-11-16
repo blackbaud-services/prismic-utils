@@ -1,19 +1,8 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import deserializeDocument, { componentAsText } from '../'
+import deserializeDocument from '../'
 import rawDocument from '../../../test/prismic.json'
-import Adapter from 'enzyme-adapter-react-15'
-import Enzyme, { mount } from 'enzyme'
-import { JSDOM } from 'jsdom'
 
-const { window } = new JSDOM('<!doctype html><html><body></body></html>')
-global.window = window
-global.document = window.document
-global.navigator = { userAgent: 'node.js' }
-
-Enzyme.configure({ adapter: new Adapter() })
-
-const htmlDocument = deserializeDocument(rawDocument, {react: false})
 const document = deserializeDocument(rawDocument)
 const { data } = document
 
@@ -24,24 +13,12 @@ describe('Deserialize', () => {
     assert.equal(document.never_before_seen_property, 'foo')
   })
 
-  it('converts Rich Text to React Components', () => {
-    const wrapper = mount(data.reactText)
-    const heading = wrapper.find('h1')
-
-    assert.equal(heading.length, 1)
-    assert.equal(heading.text(), 'Hi, this is a title')
+  it('returns the html for a Rich Text area', () => {
+    assert.equal(data.richText.html, '<h1>Hi, this is a title</h1>')
   })
 
-  it('converts Rich Text to HTML, when React is disabled', () => {
-    const html = htmlDocument.data.reactText
-
-    assert.equal(html, '<h1>Hi, this is a title</h1>')
-  })
-
-  it('converts nested Rich Text to HTML, when React is disabled', () => {
-    const html = htmlDocument.data.slices[0].items[0].rich.text
-
-    assert.equal(html, '<h1>foo</h1>')
+  it('returns the raw data for a Rich Text area', () => {
+    assert.equal(data.richText.data, rawDocument.data.richText)
   })
 
   it('leaves Key Text untreated', () => {
@@ -97,16 +74,7 @@ describe('Deserialize', () => {
   })
 
   it('performs on Rich Text in Slices', () => {
-    const wrapper = mount(data.slices[0].items[0].rich.text)
-    const heading = wrapper.find('h1')
-
-    assert.equal(heading.length, 1)
-    assert.equal(heading.text(), 'foo')
-  })
-})
-
-describe('Component as text', () => {
-  it('removes surrounding tags, leaving only text', () => {
-    assert.equal(componentAsText(data.reactText), 'Hi, this is a title')
+    assert(data.slices[0].items[0].rich.text.html, '<h1>foo</h1>')
+    assert(data.slices[0].items[0].rich.text.data, rawDocument.data.slices[0].items[0]['rich-text'])
   })
 })
