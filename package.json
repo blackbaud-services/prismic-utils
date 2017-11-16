@@ -1,6 +1,6 @@
 {
   "name": "prismic-utils",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "A collection of functions for parsing data from a Prismic CMS",
   "main": "dist/index.js",
   "scripts": {
@@ -41,8 +41,7 @@
     "prismic-javascript": "^1.4.1",
     "prismic-reactjs": "^0.2.3",
     "react-dom": "^15",
-    "sinon": "^2.3.2",
-    "striptags": "^2.1.1"
+    "sinon": "^2.3.2"
   },
   "standard": {
     "ignore": [
