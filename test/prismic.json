@@ -14,7 +14,7 @@
   "alternate_languages": [],
   "never_before_seen_property": "foo",
   "data": {
-    "reactText": [
+    "richText": [
       {
         "type": "heading1",
         "text": "Hi, this is a title",

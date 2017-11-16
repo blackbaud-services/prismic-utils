@@ -13,6 +13,7 @@ A collection of functions for fetching and parsing data from a Prismic CMS
 3. [Reducers](#reducers)
 4. [Action Creators](#action-reducers)
 5. [Fetching Data](#fetching-data)
+6. [Utils](#utils)
 
 ---
 
@@ -41,10 +42,6 @@ const page = deserializeDocument(doc, options)
 **Params**
 
 `doc`: the Prismic document that has been fetched from the Prismic API
-
-`options`: additional options
-
-- `react` (boolean, default `true`): whether or not Rich Text should be converted to React Components.
 
 **Nest deserialized data**
 
@@ -146,4 +143,24 @@ import { fetchDocument } from 'prismic-utils'
 
 fetchDocument(options)
 	.then((doc) => doc)
+```
+
+---
+
+### Utils
+
+Prismic utils also exports a couple of useful utilities
+
+**PrismicRichText**
+
+This is a React component that can be used to render Rich Text fields using all react components, rather than relying on inserting raw HTML using dangerouslySetInnerHTML.
+
+```
+import { PrismicRichText } from 'prismic-utils'
+
+const MyComponent = ({ myRichTextField }) => (
+	<PrismicRichText>
+		{myRichTextField.data}
+	</PrismicRichText>
+)
 ```
