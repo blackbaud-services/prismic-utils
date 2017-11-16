@@ -13,12 +13,8 @@ describe('Deserialize', () => {
     assert.equal(document.never_before_seen_property, 'foo')
   })
 
-  it('returns the html for a Rich Text area', () => {
-    assert.equal(data.richText.html, '<h1>Hi, this is a title</h1>')
-  })
-
-  it('returns the raw data for a Rich Text area', () => {
-    assert.equal(data.richText.data, rawDocument.data.richText)
+  it('leaves Rich Text untreated', () => {
+    assert.equal(data.richText, rawDocument.data.richText)
   })
 
   it('leaves Key Text untreated', () => {
@@ -74,7 +70,6 @@ describe('Deserialize', () => {
   })
 
   it('performs on Rich Text in Slices', () => {
-    assert(data.slices[0].items[0].rich.text.html, '<h1>foo</h1>')
-    assert(data.slices[0].items[0].rich.text.data, rawDocument.data.slices[0].items[0]['rich-text'])
+    assert(data.slices[0].items[0].rich.text, rawDocument.data.slices[0].items[0]['rich-text'])
   })
 })
