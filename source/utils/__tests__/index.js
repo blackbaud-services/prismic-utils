@@ -15,8 +15,7 @@ global.navigator = { userAgent: 'node.js' }
 
 Enzyme.configure({ adapter: new Adapter() })
 
-const document = deserializeDocument(rawDocument)
-const { data } = document
+const data = deserializeDocument(rawDocument)
 
 describe('PrismicRichText', () => {
   it('allows the returned Rich Text data to be rendered into a React component', () => {
