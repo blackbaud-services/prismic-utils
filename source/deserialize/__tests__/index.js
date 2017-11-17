@@ -3,14 +3,13 @@ import assert from 'assert'
 import deserializeDocument from '../'
 import rawDocument from '../../../test/prismic.json'
 
-const document = deserializeDocument(rawDocument)
-const { data } = document
+const data = deserializeDocument(rawDocument)
 
 describe('Deserialize', () => {
   it('retains document metadata', () => {
-    assert.equal(document.id, 'document-id')
-    assert.equal(document.uid, 'document-uid')
-    assert.equal(document.never_before_seen_property, 'foo')
+    assert.equal(data.id, 'document-id')
+    assert.equal(data.uid, 'document-uid')
+    assert.equal(data.never_before_seen_property, 'foo')
   })
 
   it('leaves Rich Text untreated', () => {

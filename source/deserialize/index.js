@@ -8,7 +8,7 @@ const deserializeDocument = ({ data, ...metadata }, options = { react: true }) =
 
   return {
     ...metadata,
-    data: mapFieldsToObject(deserializedFields)
+    ...mapFieldsToObject(deserializedFields)
   }
 }
 
