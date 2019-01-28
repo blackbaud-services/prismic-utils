@@ -5,7 +5,7 @@ const buildPredicates = (type, predicates = []) => (
 )
 
 export const fetchDocuments = ({
-  options = {}, // https://prismic.io/docs/javascript/query-the-api/query-options-reference
+  pageSize = 20,
   predicates, // https://prismic.io/docs/javascript/query-the-api/query-predicates-reference
   repository,
   token,
@@ -16,6 +16,7 @@ export const fetchDocuments = ({
     api.everything()
     .ref(token || api.master())
     .query(buildPredicates(type, predicates), {})
+    .pageSize(pageSize)
     .submit()
   )).then((response) => (
     response.results
