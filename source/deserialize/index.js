@@ -21,6 +21,7 @@ const deserializeFields = (fields, options) => (
 
 const isSlice = (value) => isArray(value) && value.length > 0 && value[0].slice_type
 const isGroup = (value) => isArray(value) && value.length > 0 && !value[0].type
+const isImage = (value = {}) => value.url && value.alt
 
 const deserializeField = (value, options) => {
   if (isSlice(value)) {
@@ -39,6 +40,11 @@ const deserializeField = (value, options) => {
       const deserializedFields = deserializeFields(group, options)
       return mapFieldsToObject(deserializedFields)
     })
+  } else if (isImage(value)) {
+    return {
+      ...value,
+      url: value.url.replace('auto=compress,format', '')
+    }
   } else {
     return value
   }
