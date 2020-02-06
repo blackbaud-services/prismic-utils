@@ -20,8 +20,9 @@ describe('Deserialize', () => {
     assert.equal(data.keyText, rawDocument.data.keyText)
   })
 
-  it('leaves Image untreated', () => {
-    assert.deepEqual(data.image, rawDocument.data.image)
+  it.only('returns images, removing the auto compression', () => {
+    assert.equal(data.image.url, rawDocument.data.image.url.replace('auto=compress,format', ''))
+    assert.equal(data.image.alt, rawDocument.data.image.alt)
   })
 
   it('leaves Links untreated', () => {

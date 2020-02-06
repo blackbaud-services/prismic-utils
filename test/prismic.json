@@ -28,7 +28,7 @@
       },
       "alt": "foo bar",
       "copyright": null,
-      "url": "https://wroomdev.s3.amazonaws.com/tutoblanktemplate%2F97109f41-140e-4dc9-a2c8-96fb10f14051_star.gif",
+      "url": "https://wroomdev.s3.amazonaws.com/tutoblanktemplate%2F97109f41-140e-4dc9-a2c8-96fb10f14051_star.gif?auto=compress,format",
       "mobile": {
         "dimensions": {
           "width": 1080,
@@ -36,7 +36,7 @@
         },
         "alt": "foo bar",
         "copyright": null,
-        "url": "https://wroomdev.s3.amazonaws.com/tutoblanktemplate%2F97109f41-140e-4dc9-a2c8-96fb10f14051_star.gif"
+        "url": "https://wroomdev.s3.amazonaws.com/tutoblanktemplate%2F97109f41-140e-4dc9-a2c8-96fb10f14051_star.gif?auto=compress,format"
       }
     },
     "keyText": "key text",
