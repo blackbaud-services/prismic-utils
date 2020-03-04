@@ -3,6 +3,7 @@
 A collection of functions for fetching and parsing data from a Prismic CMS
 
 [![Build status](https://badge.buildkite.com/2ba54e4ba3c3a0855de4c165b15f684841fbab4f616a9bba7d.svg?branch=master&style=flat-square)](https://buildkite.com/everyday-hero/prismic-utils)
+[![npm](https://img.shields.io/npm/v/prismic-utils.svg?style=flat-square)](https://www.npmjs.com/package/prismic-utils)
 
 ---
 
