@@ -28,6 +28,7 @@ export const fetchDocuments = ({
       if (allDocs.length < limit && response.next_page) {
         return fetchDocuments({
           documents: allDocs,
+          limit,
           page: page + 1,
           pageSize,
           predicates,
