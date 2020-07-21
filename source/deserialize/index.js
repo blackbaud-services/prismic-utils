@@ -21,7 +21,7 @@ const deserializeFields = (fields, options) => (
 
 const isSlice = (value) => isArray(value) && value.length > 0 && value[0].slice_type
 const isGroup = (value) => isArray(value) && value.length > 0 && !value[0].type
-const isImage = (value) => value && value.url && value.alt
+const isImage = (value) => value && value.url && value.dimensions
 
 const deserializeField = (value, options) => {
   if (isSlice(value)) {
