@@ -15,14 +15,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/everydayhero/prismic-utils.git"
+    "url": "git+https://github.com/blackbaud-services/prismic-utils.git"
   },
   "author": "@everydayhero",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/everydayhero/prismic-utils/issues"
+    "url": "https://github.com/blackbaud-services/prismic-utils/issues"
   },
-  "homepage": "https://github.com/everydayhero/prismic-utils#readme",
+  "homepage": "https://github.com/blackbaud-services/prismic-utils#readme",
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-preset-env": "^1.6.1",
@@ -42,6 +42,9 @@
     "prismic-reactjs": "^0.2.3",
     "react-dom": "^15",
     "sinon": "^2.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "standard": {
     "ignore": [

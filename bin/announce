@@ -28,6 +28,6 @@ ${SLACK_WEBHOOK_URL} \
   "text": "Prismic Utils version ${PACKAGE_VERSION} released :tada:",
   "channel": "#edh-profs-dev",
   "username": "Prismic Utils",
-  "icon_emoji": ":${SLACK_ANNOUNCE_EMOJI}:"
+  "icon_emoji": ":fiesta_parrot:"
 }
 JSON

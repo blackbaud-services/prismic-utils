@@ -3,14 +3,10 @@ build:
   working_dir: /code
   volumes:
     - .:/code
-    - $SSH_AUTH_SOCK:/ssh-agent
   environment:
-    - AWS_KEY
-    - AWS_SECRET
-    - NPM_USER
-    - NPM_PASS
     - NPM_EMAIL
+    - NPM_PASS
+    - NPM_USER
+    - SLACK_ANNOUNCE_EMOJI
     - SLACK_WEBHOOK_URL
-    - BUILD_URL
-    - BUILDKITE_BUILD_URL
-    - BUILDKITE_BUILD_NUMBER
+    - TEAMS_WEBHOOK_URL
