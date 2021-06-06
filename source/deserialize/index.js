@@ -3,7 +3,7 @@ import set from 'lodash/set'
 import sortBy from 'lodash/sortBy'
 import toPairs from 'lodash/toPairs'
 
-const deserializeDocument = ({ data, ...metadata }, options = { react: true }) => {
+const deserializeDocument = ({ data, ...metadata }, options = { react: true, encodeImage: false }) => {
   const deserializedFields = deserializeFields(data, options)
 
   return {
@@ -43,7 +43,7 @@ const deserializeField = (value, options) => {
   } else if (isImage(value)) {
     return {
       ...value,
-      url: value.url.replace('auto=compress,format', '')
+      url: !options.encodeImage ? value.url.replace('auto=compress,format', '') : value.url
     }
   } else {
     return value
