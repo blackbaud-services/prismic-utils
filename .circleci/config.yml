@@ -1,0 +1,69 @@
+version: 2.1
+
+orbs:
+  npm-publisher: uraway/npm-publisher@0.2.0
+
+workflows:
+  version: 2
+  staging:
+    jobs:
+      - staging:
+        filters:
+          branches:
+            ignore: master
+
+  production:
+    jobs:
+      - production:
+          filters:
+            branches:
+              only: master
+
+commands:
+  install:
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies 📦
+          command: yarn install --ignore-engines
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+  lint:
+    steps:
+      - run:
+          name: Lint 🛠
+          command: yarn test:lint
+
+  publish:
+    steps:
+      - npm-publisher/publish-from-package-version:
+          pre-publish-steps:
+            - run:
+                name: Prepare for NPM Publish
+                command: yarn prepublish
+          post-publish-steps:
+            - run:
+                name: Announce Release
+                command: yarn announce
+          publish-token-variable: NPM_TOKEN
+          package-path: dist
+
+jobs:
+  staging:
+    docker:
+      - image: circleci/node:6
+    steps:
+      - install
+      - lint
+
+  production:
+    docker:
+      - image: circleci/node:6
+    steps:
+      - install
+      - lint
+      - publish
