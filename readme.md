@@ -2,7 +2,7 @@
 
 A collection of functions for fetching and parsing data from a Prismic CMS
 
-[![Build Status](https://travis-ci.com/blackbaud-services/prismic-utils.svg?branch=master)](https://travis-ci.com/blackbaud-services/prismic-utils)
+[![Build Status](https://circleci.com/gh/blackbaud-services/prismic-utils.svg?style=svg&circle-token=0a4618b313f5ffe7a0eb721540edfd57264fb082)](https://app.circleci.com/pipelines/github/blackbaud-services/prismic-utils)
 [![npm](https://img.shields.io/npm/v/prismic-utils.svg?style=flat-square)](https://www.npmjs.com/package/prismic-utils)
 
 ---
