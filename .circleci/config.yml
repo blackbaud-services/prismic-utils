@@ -50,7 +50,6 @@ commands:
                 name: Announce Release
                 command: yarn announce
           publish-token-variable: NPM_TOKEN
-          package-path: dist
 
 jobs:
   staging:
