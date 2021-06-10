@@ -19,15 +19,3 @@ ${TEAMS_WEBHOOK_URL} \
 }
 JSON
 
-curl \
-${SLACK_WEBHOOK_URL} \
--X POST \
--H 'Content-Type: application/json' \
--d @/dev/stdin <<JSON
-{
-  "text": "Prismic Utils version ${PACKAGE_VERSION} released :tada:",
-  "channel": "#edh-profs-dev",
-  "username": "Prismic Utils",
-  "icon_emoji": ":fiesta_parrot:"
-}
-JSON
