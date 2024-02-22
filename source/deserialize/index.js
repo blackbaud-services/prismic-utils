@@ -13,7 +13,7 @@ const deserializeDocument = ({ data, ...metadata }, options = { react: true, enc
 }
 
 const deserializeFields = (fields, options) => (
-  toPairs(fields).map(([ key, value ]) => ({
+  toPairs(fields).map(([key, value]) => ({
     key,
     value: deserializeField(value, options)
   }))

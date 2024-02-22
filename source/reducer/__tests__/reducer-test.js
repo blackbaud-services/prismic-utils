@@ -20,7 +20,7 @@ describe('Create Document Reducer', () => {
 
   it('should handle FETCH_SUCCESS', () => {
     const reducer = createDocumentReducer('page')
-    const state = reducer({}, {type: 'page/FETCH_SUCCESS', payload: { data: rawPrismicDocument }})
+    const state = reducer({}, { type: 'page/FETCH_SUCCESS', payload: { data: rawPrismicDocument } })
     assert.equal(state.status, 'fetched')
     assert.equal(state.data.id, 'document-id')
   })
