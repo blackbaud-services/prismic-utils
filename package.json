@@ -40,7 +40,7 @@
     "lodash": "^4.17.4",
     "prismic-dom": "^2.0.6",
     "prismic-javascript": "^1.4.1",
-    "prismic-reactjs": "^0.2.3",
+    "prismic-reactjs": "1.3.4",
     "react-dom": "^15",
     "sinon": "^2.3.2"
   },

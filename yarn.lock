@@ -1665,14 +1665,6 @@ core-util-is@1.0.2:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==
 
-create-react-class@^15.6.0:
-  version "15.7.0"
-  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.7.0.tgz#7499d7ca2e69bb51d13faf59bd04f0c65a1d6c1e"
-  integrity sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==
-  dependencies:
-    loose-envify "^1.3.1"
-    object-assign "^4.1.1"
-
 cross-fetch@^2.2.0:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-2.2.6.tgz#2ef0bb39a24ac034787965c457368a28730e220a"
@@ -3208,7 +3200,7 @@ lolex@^1.6.0:
   resolved "https://registry.yarnpkg.com/lolex/-/lolex-1.6.0.tgz#3a9a0283452a47d7439e72731b9e07d7386e49f6"
   integrity sha512-/bpxDL56TG5LS5zoXxKqA6Ro5tkOS5M8cm/7yQcwLIKIcM2HR5fjjNCaIhJNv96SEk4hNGSafYMZK42Xv5fihQ==
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -3668,7 +3660,7 @@ prismic-dom@^2.0.6:
     "@prismicio/richtext" "^1.1.0"
     escape-html "1.0.3"
 
-prismic-helpers@^1.0.0:
+prismic-helpers@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/prismic-helpers/-/prismic-helpers-1.0.3.tgz#cc1aa184f8791ed6b0a1775a9eb68a74a83f741e"
   integrity sha512-eGCSflFwsWeXe7BdqWWGjjoaq1SPr61Y55xIUkgYumKFmfJsK9TVcSkRp0rdwW0hGnnDSRvjJwIo2kkDwG7KxA==
@@ -3681,22 +3673,22 @@ prismic-javascript@^1.4.1:
     cross-fetch "^2.2.0"
     promise-polyfill "8.0.0"
 
-prismic-reactjs@^0.2.3:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/prismic-reactjs/-/prismic-reactjs-0.2.4.tgz#ac234121cab69a3df8de2b9d237bc4f1cb67ea67"
-  integrity sha512-Lu6abQDelW2dzdOI2VDao00fJ/5lsor1yNmKbWANrZ8zskTidKFwPBJa9xwfFALVupKRV3Eq/Y2h44xEMm9tZw==
+prismic-reactjs@1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/prismic-reactjs/-/prismic-reactjs-1.3.4.tgz#8d58f46b7818f04d34d80fcb4916a1fda4f9c63a"
+  integrity sha512-f2k8VOC5p8F9QOS1DIfXgU9HBRQgoj3vpPIzbUlKo6PvEW+jbcJIN2MOCscuvgh7JDB2npUS3nHe4lhjbSRofA==
   dependencies:
-    prismic-helpers "^1.0.0"
-    prismic-richtext "^0.2.6"
-    react "^15.6.1"
+    prismic-helpers "^1.0.3"
+    prismic-richtext "^1.0.3"
+    prop-types "^15.7.2"
 
-prismic-richtext@^0.2.6:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/prismic-richtext/-/prismic-richtext-0.2.7.tgz#ad203fc076bda9c4b6358ca7249f7e0072c5a323"
-  integrity sha512-tFyehJdRBZ0fYylUlBzLYxsBaPFJGRD/RqoDP8LlvmAWsKxIhSP2SNnmg3Gq6nossgMat56VYVGT6Rp1GeLISA==
+prismic-richtext@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/prismic-richtext/-/prismic-richtext-1.0.3.tgz#ce8c8c18d65b01f1036f222b993ad2de700199fe"
+  integrity sha512-ZM45dVPL713+oDpt8ysWRY2pw3esBxRrqBlUO+q/T0WK0SNVSq29tQYhVdIALd8hRfF7X1lfpW0Q0YymEdh0AA==
   dependencies:
-    prismic-helpers "^1.0.0"
-    uuid "^3.1.0"
+    ramda "^0.26.1"
+    uuid "^3.3.2"
 
 promise-polyfill@8.0.0:
   version "8.0.0"
@@ -3760,6 +3752,11 @@ railroad-diagrams@^1.0.0:
   resolved "https://registry.yarnpkg.com/railroad-diagrams/-/railroad-diagrams-1.0.0.tgz#eb7e6267548ddedfb899c1b90e57374559cddb7e"
   integrity sha512-cz93DjNeLY0idrCNOH6PviZGRN9GJhsdm9hpn1YCS879fj4W+x5IFJhhkRZcwVgMmFF7R82UA/7Oh+R8lLZg6A==
 
+ramda@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
+  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
+
 randexp@0.4.6:
   version "0.4.6"
   resolved "https://registry.yarnpkg.com/randexp/-/randexp-0.4.6.tgz#e986ad5e5e31dae13ddd6f7b3019aa7c87f60ca3"
@@ -3787,17 +3784,6 @@ react-is@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
-
-react@^15.6.1:
-  version "15.7.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.7.0.tgz#10308fd42ac6912a250bf00380751abc41ac7106"
-  integrity sha512-5/MMRYmpmM0sMTHGLossnJCrmXQIiJilD6y3YN3TzAwGFj6zdnMtFv6xmi65PHKRV+pehIHpT7oy67Sr6s9AHA==
-  dependencies:
-    create-react-class "^15.6.0"
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.10"
 
 readdirp@~3.6.0:
   version "3.6.0"
@@ -4456,7 +4442,7 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-uuid@^3.1.0, uuid@^3.3.2:
+uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
