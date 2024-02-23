@@ -17,11 +17,11 @@ export const fetchDocuments = ({
   Prismic.getApi(`https://${repository}.cdn.prismic.io/api/v2`)
     .then((api) => (
       api.everything()
-      .ref(token || api.master())
-      .query(buildPredicates(type, predicates), {})
-      .pageSize(pageSize)
-      .page(page)
-      .submit()
+        .ref(token || api.master())
+        .query(buildPredicates(type, predicates), {})
+        .pageSize(pageSize)
+        .page(page)
+        .submit()
     )).then((response) => {
       const allDocs = [...documents, ...response.results]
 
